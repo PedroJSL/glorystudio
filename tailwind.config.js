@@ -9,6 +9,23 @@ module.exports = {
     ],
 
     theme: {
+        colors:{
+            pink: {
+                lighter: '#eab3d1',
+                light: '#e483b4',
+                DEFAULT: '#dd5a9c',
+                dark: '#a11355'
+            },
+            turquoise:{
+                DEFAULT: '#00a19b'
+            },
+            white:{
+                DEFAULT: '#FFF',
+            },
+            black:{
+                DEFAULT: '#000',
+            },
+        },
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],

@@ -1,3 +1,27 @@
+/*
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
+
+.nav-link-active{
+    @apply py-2 px-2 text-turquoise border-b-2 border-turquoise font-bold;
+}
+
+
 @import 'tailwindcss/utilities';
+*/
+@tailwind base;
+@tailwind components;
+
+.btn{
+    @apply py-1 px-1 font-medium text-white bg-pink-dark rounded hover:bg-pink transition duration-300;
+}
+
+.nav-link{
+    @apply py-2 px-2 text-pink-light font-semibold hover:text-turquoise transition duration-300;
+}
+.nav-link-active{
+    @apply py-2 px-2 text-turquoise border-b-2 border-turquoise font-bold;
+}
+
+
+@tailwind utilities;
