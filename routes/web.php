@@ -16,12 +16,19 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    return Inertia::render('Index');
+    /*
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+    */
+});
+
+Route::get('/about-me', function(){
+    return Inertia::render('AboutMe');
 });
 
 Route::get('/dashboard', function () {
