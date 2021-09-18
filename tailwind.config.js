@@ -26,8 +26,9 @@ module.exports = {
                 dark: '#A11355',
             },
             aqua:{
+                ligther: '#e6fffe',
                 light: '#b3fffc',
-                DEFAULT: '#00e6de', //00A19B
+                DEFAULT: '#00ccc5',//'#00e6de', //00A19B
                 dark: '#009994',
             }
         },
