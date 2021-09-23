@@ -20774,7 +20774,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login/Panel de usuario "), _hoisted_8], 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu movil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Transicion:\n      *.- enter-class: Estado inicial\n      *.- enter-active-class: Animacion de entrada\n      *.- enter-to: Estado final tras la entrada.\n\n      *.- leave: estado inicial de salida\n      *.- leave-active: Animación de salida\n      *.- leave-to: estado final tras la salida\n      "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu movil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Transicion:\r\n      *.- enter-class: Estado inicial\r\n      *.- enter-active-class: Animacion de entrada\r\n      *.- enter-to: Estado final tras la entrada.\r\n\r\n      *.- leave: estado inicial de salida\r\n      *.- leave-active: Animación de salida\r\n      *.- leave-to: estado final tras la salida\r\n      "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     "enter-active-class": "transform transition duration-200",
     "enter-class": "-translate-y-1/2 scale-y-0 opacity-0",
     "enter-to-class": "translate-y-0 scale-y-100 opacity-100",
