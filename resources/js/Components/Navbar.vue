@@ -3,7 +3,7 @@
     <nav class="flex flex-row shadow-md justify-between" ref = "target">
       <!-- Botón Menú -->
       <div  class="flex flex-row items-center mx-2 lg:hidden">
-        <button v-on:click="showMenu = !showMenu" class="w-10 h-10 outline-none relative">
+        <button v-on:click="showHideMenu" class="w-10 h-10 outline-none relative">
           <div class="w-5">
               <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'rotate-45': showMenu,' -translate-y-1.5': !showMenu }"></span>
               <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'opacity-0': showMenu } "></span>
@@ -31,9 +31,9 @@
       </div>
 
       <!-- Avatar de usuario -->
-      <div v-on:click="showHideUserMenu" class="flex flex-row items-center mr-2 lg:hidden" >
-        <button class="outline-none">
-          <img class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1" src="/images/user.png" alt="" />
+      <div class="flex flex-row items-center mr-2 lg:hidden" >
+        <button v-on:click="showHideUserMenu" class="outline-none">
+          <img v-bind:class="{'border-aqua-dark':this.showUserMenu}" class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1" src="/images/user.png" alt="" />
         </button>
       </div>
 
@@ -81,8 +81,16 @@
       </transition>
 
 
-    <div class="flex-col items-end hidden" ref="userMenu">
-      <ul class="text-center">
+    <transition
+        enter-active-class="transform transition duration-200"
+        enter-class="-translate-y-1/2 scale-y-0 opacity-0"
+        enter-to-class="translate-y-0 scale-y-100 opacity-100"
+        leave-active-class="transform transition duration-300"
+        leave-class="translate-y-0 scale-y-100 opacity-100"
+        leave-to-class="-translate-y-1/2 scale-y-0 opacity-0" >
+
+    <div v-if="showUserMenu" class="absolute w-auto mt-0 p-2 right-0 flex flex-col items-end bg-white shadow-md rounded-b-md">
+      <ul v-if="user === null" class="text-center">
         <li class="p-2">
           <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark " href="/register"> Regístrate </a>
         </li>
@@ -91,40 +99,76 @@
                   hover:text-white hover:border-aqua-dark hover:bg-aqua " href="/login"> Iniciar Sesión </a>
         </li>
       </ul>
+      <div v-else>
+        <ul class="mb-0 p-2 shadow-sm text-right">
+            <li><h2>Hola, {{ user.name }}</h2></li>
+        </ul>
+
+        <ul class="text-center p-2">
+            <li>
+                <form @submit.prevent="logout">
+                    <input class="mr-1 w-auto text-sm p-1 rounded-md bg-white text-pink-dark border-2 border-pink-dark
+                  hover:text-white hover:border-aqua-dark hover:bg-aqua " type="submit" value="Cerrar Sesión">
+                </form>
+            </li>
+        </ul>
+
+      </div>
     </div>
 
+    </transition>
   </header>
 </template>
 
 <script>
 import vClickOutside from 'click-outside-vue3';
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/inertia-vue3'
 
 export default {
   props: [],
   directives:{
       clickOutside: vClickOutside.directive
   },
+  setup(){
+      const user = computed( () => usePage().props.value.auth.user)
+        console.log(user);
+      return { user }
+  },
   data() {
     return {
       currentUrl: "",
       showMenu: false,
+      showUserMenu: false,
     };
   },
   mounted: function () {
     this.currentUrl = window.location.pathname;
   },
   methods: {
-    showHideMenu() {
-      //this.$refs.menu.classList.toggle("hidden");
-      //this.$refs.menu.classList.toggle("transform");
-      //this.$refs.menuIcon.classList.toggle("transform");
-    },
-    showHideUserMenu() {},
     onClickOutside(event){
         if(this.showMenu === true)
         {
             this.showMenu = false;
         }
+        if(this.showUserMenu === true)
+        {
+            this.showUserMenu = false;
+        }
+    },
+    showHideUserMenu(){
+        this.showUserMenu = !this.showUserMenu;
+        this.showMenu = false;
+    },
+    showHideMenu()
+    {
+        this.showMenu = !this.showMenu;
+        this.showUserMenu = false;
+    },
+    logout(){
+        this.$inertia.post('/logout', {})
+        this.showMenu = false;
+        this.showUserMenu = false;
     },
   },
 };
