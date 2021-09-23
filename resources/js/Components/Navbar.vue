@@ -1,19 +1,17 @@
 <template>
-  <header>
-    <nav class="flex flex-row shadow-md justify-between">
+  <header v-click-outside="onClickOutside">
+    <nav class="flex flex-row shadow-md justify-between" ref = "target">
       <!-- Botón Menú -->
-      <div v-on:click="showHideMenu" class="flex flex-row items-center ml-2 text-pink-dark lg:hidden">
-          <button class ="outline-none">
-
-            <svg v-if="showMenu" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> <!-- boton con X -->
-            </svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /> <!-- Boton de menu -->
-            </svg>
-
-          </button>
+      <div  class="flex flex-row items-center mx-2 lg:hidden">
+        <button v-on:click="showMenu = !showMenu" class="w-10 h-10 outline-none relative">
+          <div class="w-5">
+              <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'rotate-45': showMenu,' -translate-y-1.5': !showMenu }"></span>
+              <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'opacity-0': showMenu } "></span>
+              <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'-rotate-45': showMenu, ' translate-y-1.5': !showMenu}"></span>
+          </div>
+        </button>
       </div>
+
 
       <div class="flex flex-row lg:justify-start">
         <!-- Logo -->
@@ -24,95 +22,110 @@
 
         <!-- Links de Navegacion -->
         <div class="hidden lg:flex lg:flex-row p-2 items-center">
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/about-me'}" class="text-pink mx-2 hover:text-aqua-dark" href="/about-me" >Sobre mi</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/portfolio'}" class="text-pink mx-2 hover:text-aqua-dark" href="/portfolio">Portfolio</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/blog'}" class="text-pink mx-2 hover:text-aqua-dark" href="/blog">Blog</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/shop'}" class="text-pink mx-2 hover:text-aqua-dark" href="/shop">Tienda</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/contact'}" class="text-pink mx-2 hover:text-aqua-dark" href="/contact">Contacto</a>
+          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/about-me',}" class="text-pink mx-2 hover:text-pink-dark" href="/about-me">Sobre mi</a>
+          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/portfolio',}" class="text-pink mx-2 hover:text-pink-dark" href="/portfolio">Portfolio</a>
+          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/blog',}" class="text-pink mx-2 hover:text-pink-dark" href="/blog">Blog</a>
+          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/shop',}" class="text-pink mx-2 hover:text-pink-dark" href="/shop">Tienda</a>
+          <!--a v-bind:class="{'text-aqua-dark': this.currentUrl === '/contact',}" class="text-pink mx-2 hover:text-pink-dark" href="/contact">Contacto</a-->
         </div>
       </div>
 
       <!-- Avatar de usuario -->
-      <div v-on:click="showHideUserMenu" class="flex flex-row items-center mr-2">
-          <button class="outline-none">
-            <img class="w-9 rounded-full border-2 border-pink-dark hover:border-aqua-dark p-1" src="/images/user.png" alt="">
-          </button>
+      <div v-on:click="showHideUserMenu" class="flex flex-row items-center mr-2 lg:hidden" >
+        <button class="outline-none">
+          <img class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1" src="/images/user.png" alt="" />
+        </button>
       </div>
 
-      <!-- Login/Panel de usuario
+      <!-- Login/Panel de usuario -->
       <div class="hidden lg:flex lg:flex-row p-2 items-center">
-        <a class="mr-1 text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark" href="/register" >
-          Regístrate
-        </a>
-        <a class="mr-1 text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua" href="/login">
-          Iniciar Sesión
-        </a>
+        <a class="mr-1 text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark" href="/register">Regístrate</a>
+        <a class="mr-1 text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark
+                hover:text-white hover:border-aqua-dark hover:bg-aqua" href="/login">Iniciar Sesión</a>
       </div>
-      -->
     </nav>
+      <!-- Menu movil -->
+      <!-- Transicion:
+      *.- enter-class: Estado inicial
+      *.- enter-active-class: Animacion de entrada
+      *.- enter-to: Estado final tras la entrada.
 
-    <div v-show="showMenu" class="" id="mobile-menu" >
-        <ul class="">
-        <li><a v-bind:class="{'text-aqua-dark': this.currentUrl === '/about-me'}" class="block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm" href="/about-me">Sobre mi</a></li>
-        <li><a v-bind:class="{'text-aqua-dark': this.currentUrl === '/portfolio'}" class="block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm" href="/portfolio">Portfolio</a></li>
-        <li><a v-bind:class="{'text-aqua-dark': this.currentUrl === '/blog'}" class="block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm" href="/blog">Blog</a></li>
-        <li><a v-bind:class="{'text-aqua-dark': this.currentUrl === '/shop'}" class="block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm" href="/shop">Tienda</a></li>
-        <li><a v-bind:class="{'text-aqua-dark': this.currentUrl === '/contact'}" class="block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm" href="/contact">Contacto</a></li>
+      *.- leave: estado inicial de salida
+      *.- leave-active: Animación de salida
+      *.- leave-to: estado final tras la salida
+      -->
+      <transition
+        enter-active-class="transform transition duration-200"
+        enter-class="-translate-y-1/2 scale-y-0 opacity-0"
+        enter-to-class="translate-y-0 scale-y-100 opacity-100"
+        leave-active-class="transform transition duration-300"
+        leave-class="translate-y-0 scale-y-100 opacity-100"
+        leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
+      >
+      <div v-if="showMenu" class="" ref="menu">
+        <ul class="absolute left-0 right-0 bg-white mb-4 shadow-md overflow-hidden lg:hidden">
+          <li>
+            <a v-bind:class="{'text-aqua-dark hover:text-aqua-dark':this.currentUrl === '/about-me',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/about-me">Sobre mi</a>
+          </li>
+          <li>
+            <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/portfolio',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/portfolio" >Portfolio</a>
+          </li>
+          <li>
+            <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/blog',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/blog">Blog</a>
+          </li>
+          <li>
+            <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/shop',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/shop" >Tienda</a>
+          </li>
         </ul>
-    </div>
+      </div>
+      </transition>
 
-    <div v-show="showUserMenu" class="flex flex-col items-end" id = "user-menu">
-        <ul class="text-center">
+
+    <div class="flex-col items-end hidden" ref="userMenu">
+      <ul class="text-center">
         <li class="p-2">
-        <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark" href="/register" >
-          Regístrate
-        </a>
+          <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark " href="/register"> Regístrate </a>
         </li>
         <li class="p-2">
-        <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua" href="/login">
-          Iniciar Sesión
-        </a>
+          <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark
+                  hover:text-white hover:border-aqua-dark hover:bg-aqua " href="/login"> Iniciar Sesión </a>
         </li>
-        </ul>
+      </ul>
     </div>
+
   </header>
 </template>
 
 <script>
-import { onBeforeMount } from '@vue/runtime-core';
+import vClickOutside from 'click-outside-vue3';
+
 export default {
   props: [],
-  data(){
-      return{
-       showMenu:false,
-       showUserMenu:false,
-       currentUrl:"",
-      }
+  directives:{
+      clickOutside: vClickOutside.directive
   },
-  mounted:function(){
-      this.currentUrl = window.location.pathname;
+  data() {
+    return {
+      currentUrl: "",
+      showMenu: false,
+    };
   },
-  methods:{
-      showHideMenu(){
-          if(this.showMenu == false)
-          {
-            this.showMenu = true;
-          }
-          else
-          {
+  mounted: function () {
+    this.currentUrl = window.location.pathname;
+  },
+  methods: {
+    showHideMenu() {
+      //this.$refs.menu.classList.toggle("hidden");
+      //this.$refs.menu.classList.toggle("transform");
+      //this.$refs.menuIcon.classList.toggle("transform");
+    },
+    showHideUserMenu() {},
+    onClickOutside(event){
+        if(this.showMenu === true)
+        {
             this.showMenu = false;
-          }
-      },
-      showHideUserMenu(){
-          if(this.showUserMenu == false)
-          {
-            this.showUserMenu = true;
-          }
-          else
-          {
-            this.showUserMenu = false;
-          }
-      },
-  }
+        }
+    },
+  },
 };
 </script>

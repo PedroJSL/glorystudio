@@ -19586,32 +19586,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var click_outside_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! click-outside-vue3 */ "./node_modules/click-outside-vue3/dist/v-click-outside.umd.js");
+/* harmony import */ var click_outside_vue3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(click_outside_vue3__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
+  directives: {
+    clickOutside: (click_outside_vue3__WEBPACK_IMPORTED_MODULE_0___default().directive)
+  },
   data: function data() {
     return {
-      showMenu: false,
-      showUserMenu: false,
-      currentUrl: ""
+      currentUrl: "",
+      showMenu: false
     };
   },
   mounted: function mounted() {
     this.currentUrl = window.location.pathname;
   },
   methods: {
-    showHideMenu: function showHideMenu() {
-      if (this.showMenu == false) {
-        this.showMenu = true;
-      } else {
-        this.showMenu = false;
-      }
+    showHideMenu: function showHideMenu() {//this.$refs.menu.classList.toggle("hidden");
+      //this.$refs.menu.classList.toggle("transform");
+      //this.$refs.menuIcon.classList.toggle("transform");
     },
-    showHideUserMenu: function showHideUserMenu() {
-      if (this.showUserMenu == false) {
-        this.showUserMenu = true;
-      } else {
-        this.showUserMenu = false;
+    showHideUserMenu: function showHideUserMenu() {},
+    onClickOutside: function onClickOutside(event) {
+      if (this.showMenu === true) {
+        this.showMenu = false;
       }
     }
   }
@@ -20572,52 +20572,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex flex-row shadow-md justify-between"
+  "class": "flex flex-row shadow-md justify-between",
+  ref: "target"
 };
 var _hoisted_2 = {
-  "class": "outline-none"
+  "class": "flex flex-row items-center mx-2 lg:hidden"
 };
 var _hoisted_3 = {
-  key: 0,
-  xmlns: "http://www.w3.org/2000/svg",
-  "class": "h-6 w-6",
-  fill: "none",
-  viewBox: "0 0 24 24",
-  stroke: "currentColor"
+  "class": "w-5"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "stroke-width": "2",
-  d: "M6 18L18 6M6 6l12 12"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_5 = {
-  key: 1,
-  xmlns: "http://www.w3.org/2000/svg",
-  "class": "h-6 w-6",
-  fill: "none",
-  viewBox: "0 0 24 24",
-  stroke: "currentColor"
-};
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "stroke-width": "2",
-  d: "M4 6h16M4 12h16M4 18h16"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_7 = {
+var _hoisted_4 = {
   "class": "flex flex-row lg:justify-start"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "flex flex-row p-2 items-center",
   href: "/"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -20630,122 +20598,167 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_9 = {
+var _hoisted_6 = {
   "class": "hidden lg:flex lg:flex-row p-2 items-center"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "outline-none"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  "class": "w-9 rounded-full border-2 border-pink-dark hover:border-aqua-dark p-1",
+  "class": "w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1",
   src: "/images/user.png",
   alt: ""
 })], -1
 /* HOISTED */
 );
 
-var _hoisted_11 = [_hoisted_10];
-var _hoisted_12 = {
+var _hoisted_8 = [_hoisted_7];
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "hidden lg:flex lg:flex-row p-2 items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "mr-1 text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark",
+  href: "/register"
+}, "Regístrate"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "mr-1 text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua",
+  href: "/login"
+}, "Iniciar Sesión")], -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
+  key: 0,
   "class": "",
-  id: "mobile-menu"
+  ref: "menu"
 };
-var _hoisted_13 = {
-  "class": ""
+var _hoisted_11 = {
+  "class": "absolute left-0 right-0 bg-white mb-4 shadow-md overflow-hidden lg:hidden"
 };
-var _hoisted_14 = {
-  "class": "flex flex-col items-end",
-  id: "user-menu"
+var _hoisted_12 = {
+  "class": "flex-col items-end hidden",
+  ref: "userMenu"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<ul class=\"text-center\"><li class=\"p-2\"><a class=\"mr-1 w-auto text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark\" href=\"/register\"> Regístrate </a></li><li class=\"p-2\"><a class=\"mr-1 w-auto text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua\" href=\"/login\"> Iniciar Sesión </a></li></ul>", 1);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<ul class=\"text-center\"><li class=\"p-2\"><a class=\"mr-1 w-auto text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark\" href=\"/register\"> Regístrate </a></li><li class=\"p-2\"><a class=\"mr-1 w-auto text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua\" href=\"/login\"> Iniciar Sesión </a></li></ul>", 1);
 
-var _hoisted_16 = [_hoisted_15];
+var _hoisted_14 = [_hoisted_13];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Botón Menú "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $options.showHideMenu && $options.showHideMenu.apply($options, arguments);
+  var _this = this;
+
+  var _directive_click_outside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("click-outside");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Botón Menú "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $data.showMenu = !$data.showMenu;
     }),
-    "class": "flex flex-row items-center ml-2 text-pink-dark lg:hidden"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_2, [$data.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" boton con X ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Boton de menu ")]))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Logo "), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Links de Navegacion "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "w-10 h-10 outline-none relative"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "aria-hidden": "true",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out", {
+      'rotate-45': $data.showMenu,
+      ' -translate-y-1.5': !$data.showMenu
+    }])
+  }, null, 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "aria-hidden": "true",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out", {
+      'opacity-0': $data.showMenu
+    }])
+  }, null, 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "aria-hidden": "true",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out", {
+      '-rotate-45': $data.showMenu,
+      ' translate-y-1.5': !$data.showMenu
+    }])
+  }, null, 2
+  /* CLASS */
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Logo "), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Links de Navegacion "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'text-aqua-dark': this.currentUrl === '/about-me'
-    }, "text-pink mx-2 hover:text-aqua-dark"]),
+    }, "text-pink mx-2 hover:text-pink-dark"]),
     href: "/about-me"
   }, "Sobre mi", 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'text-aqua-dark': this.currentUrl === '/portfolio'
-    }, "text-pink mx-2 hover:text-aqua-dark"]),
+    }, "text-pink mx-2 hover:text-pink-dark"]),
     href: "/portfolio"
   }, "Portfolio", 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'text-aqua-dark': this.currentUrl === '/blog'
-    }, "text-pink mx-2 hover:text-aqua-dark"]),
+    }, "text-pink mx-2 hover:text-pink-dark"]),
     href: "/blog"
   }, "Blog", 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'text-aqua-dark': this.currentUrl === '/shop'
-    }, "text-pink mx-2 hover:text-aqua-dark"]),
+    }, "text-pink mx-2 hover:text-pink-dark"]),
     href: "/shop"
   }, "Tienda", 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'text-aqua-dark': this.currentUrl === '/contact'
-    }, "text-pink mx-2 hover:text-aqua-dark"]),
-    href: "/contact"
-  }, "Contacto", 2
-  /* CLASS */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Avatar de usuario "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("a v-bind:class=\"{'text-aqua-dark': this.currentUrl === '/contact',}\" class=\"text-pink mx-2 hover:text-pink-dark\" href=\"/contact\">Contacto</a")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Avatar de usuario "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.showHideUserMenu && $options.showHideUserMenu.apply($options, arguments);
     }),
-    "class": "flex flex-row items-center mr-2"
-  }, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login/Panel de usuario\n      <div class=\"hidden lg:flex lg:flex-row p-2 items-center\">\n        <a class=\"mr-1 text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark\" href=\"/register\" >\n          Regístrate\n        </a>\n        <a class=\"mr-1 text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua\" href=\"/login\">\n          Iniciar Sesión\n        </a>\n      </div>\n      ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'text-aqua-dark': this.currentUrl === '/about-me'
-    }, "block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm"]),
-    href: "/about-me"
-  }, "Sobre mi", 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'text-aqua-dark': this.currentUrl === '/portfolio'
-    }, "block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm"]),
-    href: "/portfolio"
-  }, "Portfolio", 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'text-aqua-dark': this.currentUrl === '/blog'
-    }, "block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm"]),
-    href: "/blog"
-  }, "Blog", 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'text-aqua-dark': this.currentUrl === '/shop'
-    }, "block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm"]),
-    href: "/shop"
-  }, "Tienda", 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'text-aqua-dark': this.currentUrl === '/contact'
-    }, "block text-pink hover:text-aqua-dark mr-4 p-2 shadow-sm"]),
-    href: "/contact"
-  }, "Contacto", 2
-  /* CLASS */
-  )])])], 512
+    "class": "flex flex-row items-center mr-2 lg:hidden"
+  }, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login/Panel de usuario "), _hoisted_9], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showMenu]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, _hoisted_16, 512
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu movil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Transicion:\n      *.- enter-class: Estado inicial\n      *.- enter-active-class: Animacion de entrada\n      *.- enter-to: Estado final tras la entrada.\n\n      *.- leave: estado inicial de salida\n      *.- leave-active: Animación de salida\n      *.- leave-to: estado final tras la salida\n      "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+    "enter-active-class": "transform transition duration-200",
+    "enter-class": "-translate-y-1/2 scale-y-0 opacity-0",
+    "enter-to-class": "translate-y-0 scale-y-100 opacity-100",
+    "leave-active-class": "transform transition duration-300",
+    "leave-class": "translate-y-0 scale-y-100 opacity-100",
+    "leave-to-class": "-translate-y-1/2 scale-y-0 opacity-0"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [$data.showMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'text-aqua-dark hover:text-aqua-dark': _this.currentUrl === '/about-me'
+        }, "block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm"]),
+        href: "/about-me"
+      }, "Sobre mi", 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'text-aqua-dark': _this.currentUrl === '/portfolio'
+        }, "block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm"]),
+        href: "/portfolio"
+      }, "Portfolio", 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'text-aqua-dark': _this.currentUrl === '/blog'
+        }, "block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm"]),
+        href: "/blog"
+      }, "Blog", 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'text-aqua-dark': _this.currentUrl === '/shop'
+        }, "block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm"]),
+        href: "/shop"
+      }, "Tienda", 2
+      /* CLASS */
+      )])])], 512
+      /* NEED_PATCH */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, _hoisted_14, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showUserMenu]])]);
+  )], 512
+  /* NEED_PATCH */
+  )), [[_directive_click_outside, $options.onClickOutside]]);
 }
 
 /***/ }),
@@ -22188,9 +22201,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/progress */ "./node_modules/@inertiajs/progress/dist/index.js");
+/* harmony import */ var click_outside_vue3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! click-outside-vue3 */ "./node_modules/click-outside-vue3/dist/v-click-outside.umd.js");
+/* harmony import */ var click_outside_vue3__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(click_outside_vue3__WEBPACK_IMPORTED_MODULE_3__);
 var _window$document$getE;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -22214,7 +22230,7 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(app, props);
       }
-    }).use(plugin).mixin({
+    }).use(plugin).use(click_outside_vue3__WEBPACK_IMPORTED_MODULE_3__.vClickOutside).mixin({
       methods: {
         route: route
       }
@@ -22338,6 +22354,18 @@ if ($defineProperty) {
 } else {
 	module.exports.apply = applyBind;
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/click-outside-vue3/dist/v-click-outside.umd.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/click-outside-vue3/dist/v-click-outside.umd.js ***!
+  \*********************************************************************/
+/***/ (function(module) {
+
+!function(e,n){ true?module.exports=n():0}(this,function(){var e="__v-click-outside",n="undefined"!=typeof window,t="undefined"!=typeof navigator,r=n&&("ontouchstart"in window||t&&navigator.msMaxTouchPoints>0)?["touchstart"]:["click"],i=function(e){var n=e.event,t=e.handler;(0,e.middleware)(n)&&t(n)},a=function(n,t){var a=function(e){var n="function"==typeof e;if(!n&&"object"!=typeof e)throw new Error("v-click-outside: Binding value must be a function or an object");return{handler:n?e:e.handler,middleware:e.middleware||function(e){return e},events:e.events||r,isActive:!(!1===e.isActive),detectIframe:!(!1===e.detectIframe),capture:Boolean(e.capture)}}(t.value),o=a.handler,d=a.middleware,c=a.detectIframe,u=a.capture;if(a.isActive){if(n[e]=a.events.map(function(e){return{event:e,srcTarget:document.documentElement,handler:function(e){return function(e){var n=e.el,t=e.event,r=e.handler,a=e.middleware,o=t.path||t.composedPath&&t.composedPath();(o?o.indexOf(n)<0:!n.contains(t.target))&&i({event:t,handler:r,middleware:a})}({el:n,event:e,handler:o,middleware:d})},capture:u}}),c){var l={event:"blur",srcTarget:window,handler:function(e){return function(e){var n=e.el,t=e.event,r=e.handler,a=e.middleware;setTimeout(function(){var e=document.activeElement;e&&"IFRAME"===e.tagName&&!n.contains(e)&&i({event:t,handler:r,middleware:a})},0)}({el:n,event:e,handler:o,middleware:d})},capture:u};n[e]=[].concat(n[e],[l])}n[e].forEach(function(t){var r=t.event,i=t.srcTarget,a=t.handler;return setTimeout(function(){n[e]&&i.addEventListener(r,a,u)},0)})}},o=function(n){(n[e]||[]).forEach(function(e){return e.srcTarget.removeEventListener(e.event,e.handler,e.capture)}),delete n[e]},d=n?{beforeMount:a,updated:function(e,n){var t=n.value,r=n.oldValue;JSON.stringify(t)!==JSON.stringify(r)&&(o(e),a(e,{value:t}))},unmounted:o}:{};return{install:function(e){e.directive("click-outside",d)},directive:d}});
+//# sourceMappingURL=v-click-outside.umd.js.map
 
 
 /***/ }),
