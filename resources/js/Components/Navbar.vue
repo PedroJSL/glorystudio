@@ -1,6 +1,6 @@
 <template>
-  <header v-click-outside="onClickOutside">
-    <nav class="flex flex-row shadow-md justify-between" ref = "target">
+  <header class="sticky top-0" v-click-outside="onClickOutside">
+    <nav class="flex flex-row shadow-md justify-between bg-white mb-2" ref = "target">
       <!-- Botón Menú -->
       <div  class="flex flex-row items-center mx-2 lg:hidden">
         <button v-on:click="showHideMenu" class="w-10 h-10 outline-none relative">
