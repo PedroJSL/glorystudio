@@ -1,8 +1,22 @@
-/*@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
+
+.nav-link{
+    @apply text-pink mx-2 hover:text-pink-dark font-logo font-semibold;
+}
+.active
+{
+    @apply text-aqua-dark;
+}
+
+.btn{
+    @apply text-sm p-1 rounded-md bg-white text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua font-logo font-semibold;
+}
+
+.link{
+    @apply text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark font-logo font-semibold;
+}
+
 @tailwind utilities;

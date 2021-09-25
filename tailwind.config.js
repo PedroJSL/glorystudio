@@ -35,6 +35,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Lato', ...defaultTheme.fontFamily.sans],
+                logo: ['Montserrat'],
             },
         },
     },

@@ -2,9 +2,9 @@
   <header class="sticky top-0" v-click-outside="onClickOutside">
     <nav class="flex flex-row shadow-md justify-between bg-white mb-2" ref = "target">
       <!-- Botón Menú -->
-      <div  class="flex flex-row items-center mx-2 lg:hidden">
-        <button v-on:click="showHideMenu" class="w-10 h-10 outline-none relative">
-          <div class="w-5">
+      <div  class="flex flex-col items-center p-0 lg:hidden">
+        <button v-on:click="showHideMenu" class="w-10 h-10 text-center">
+          <div class="w-5 inline-block align-middle">
               <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'rotate-45': showMenu,' -translate-y-1.5': !showMenu }"></span>
               <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'opacity-0': showMenu } "></span>
               <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-pink-dark transform transition duration-500 ease-in-out" :class="{'-rotate-45': showMenu, ' translate-y-1.5': !showMenu}"></span>
@@ -16,16 +16,17 @@
       <div class="flex flex-row lg:justify-start">
         <!-- Logo -->
         <a class="flex flex-row p-2 items-center" href="/">
-          <img class="w-8 mr-2" src="/images/Logo_icon.png" alt="" />
-          <span class="text-lg font-bold text-pink-dark">Glory Studio</span>
+          <img class="h-10 mr-2 hidden lg:block" src="/images/logo_icon.png" alt="" />
+          <!--img class="h-5" src="/images/logo_letras.png" alt="" /-->
+          <span class="text-2xl tracking-wide font-medium text-pink-dark font-logo">GLORY STUDIO</span>
         </a>
 
         <!-- Links de Navegacion -->
         <div class="hidden lg:flex lg:flex-row p-2 items-center">
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/about-me',}" class="text-pink mx-2 hover:text-pink-dark" href="/about-me">Sobre mi</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/portfolio',}" class="text-pink mx-2 hover:text-pink-dark" href="/portfolio">Portfolio</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/blog',}" class="text-pink mx-2 hover:text-pink-dark" href="/blog">Blog</a>
-          <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/shop',}" class="text-pink mx-2 hover:text-pink-dark" href="/shop">Tienda</a>
+          <a v-bind:class="{'active': this.currentUrl === '/about-me',}" class="nav-link" href="/about-me">Sobre mi</a>
+          <a v-bind:class="{'active': this.currentUrl === '/portfolio',}" class="nav-link" href="/portfolio">Portfolio</a>
+          <a v-bind:class="{'active': this.currentUrl === '/blog',}" class="nav-link" href="/blog">Blog</a>
+          <a v-bind:class="{'active': this.currentUrl === '/shop',}" class="nav-link" href="/shop">Tienda</a>
           <!--a v-bind:class="{'text-aqua-dark': this.currentUrl === '/contact',}" class="text-pink mx-2 hover:text-pink-dark" href="/contact">Contacto</a-->
         </div>
       </div>
@@ -33,15 +34,14 @@
       <!-- Avatar de usuario -->
       <div v-bind:class="{'lg:hidden': user === null}" class="flex flex-row items-center mr-2" >
         <button v-on:click="showHideUserMenu" class="outline-none">
-          <img v-bind:class="{'border-aqua-dark':this.showUserMenu}" class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1" src="/images/user.png" alt="" />
+          <img v-bind:class="{'border-aqua-dark':this.showUserMenu}" class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1"  :src="userImg" alt="" />
         </button>
       </div>
 
       <!-- Login/Panel de usuario -->
       <div v-bind:class="{'lg:flex lg:flex-row': user === null}" class="hidden p-2 items-center">
-        <a class="mr-1 text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark" href="/register">Regístrate</a>
-        <a class="mr-1 text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark
-                hover:text-white hover:border-aqua-dark hover:bg-aqua" href="/login">Iniciar Sesión</a>
+        <a class="mr-1 link" href="/register">Regístrate</a>
+        <a class="mr-1 btn" href="/login">Iniciar Sesión</a>
       </div>
     </nav>
       <!-- Menu movil -->
@@ -65,16 +65,16 @@
       <div v-if="showMenu" class="" ref="menu">
         <ul class="absolute left-0 right-0 bg-white mb-4 shadow-md overflow-hidden lg:hidden">
           <li>
-            <a v-bind:class="{'text-aqua-dark hover:text-aqua-dark':this.currentUrl === '/about-me',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/about-me">Sobre mi</a>
+            <a v-bind:class="{'active':this.currentUrl === '/about-me',}" class="block nav-link mr-4 p-2 shadow-sm" href="/about-me">Sobre mi</a>
           </li>
           <li>
-            <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/portfolio',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/portfolio" >Portfolio</a>
+            <a v-bind:class="{'active': this.currentUrl === '/portfolio',}" class="block nav-link mr-4 p-2 shadow-sm" href="/portfolio" >Portfolio</a>
           </li>
           <li>
-            <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/blog',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/blog">Blog</a>
+            <a v-bind:class="{'active': this.currentUrl === '/blog',}" class="block nav-link mr-4 p-2 shadow-sm" href="/blog">Blog</a>
           </li>
           <li>
-            <a v-bind:class="{'text-aqua-dark': this.currentUrl === '/shop',}" class="block text-pink hover:text-pink-dark mr-4 p-2 shadow-sm" href="/shop" >Tienda</a>
+            <a v-bind:class="{'active': this.currentUrl === '/shop',}" class="block nav-link mr-4 p-2 shadow-sm" href="/shop" >Tienda</a>
           </li>
         </ul>
       </div>
@@ -92,11 +92,10 @@
     <div v-if="showUserMenu" class="absolute w-auto mt-0 p-2 right-0 flex flex-col items-end bg-white shadow-md rounded-b-md">
       <ul v-if="user === null" class="text-center">
         <li class="p-2">
-          <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark " href="/register"> Regístrate </a>
+          <a class="mr-1 w-auto link" href="/register"> Regístrate </a>
         </li>
         <li class="p-2">
-          <a class="mr-1 w-auto text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark
-                  hover:text-white hover:border-aqua-dark hover:bg-aqua " href="/login"> Iniciar Sesión </a>
+          <a class="mr-1 w-auto btn" href="/login"> Iniciar Sesión </a>
         </li>
       </ul>
       <div v-else>
@@ -107,8 +106,7 @@
         <ul class="text-center p-2">
             <li>
                 <form @submit.prevent="logout">
-                    <input class="mr-1 w-auto text-sm p-1 rounded-md bg-white text-pink-dark border-2 border-pink-dark
-                  hover:text-white hover:border-aqua-dark hover:bg-aqua " type="submit" value="Cerrar Sesión">
+                    <input class="mt-2 w-auto btn" type="submit" value="Cerrar Sesión">
                 </form>
             </li>
         </ul>
@@ -132,7 +130,6 @@ export default {
   },
   setup(){
       const user = computed( () => usePage().props.value.auth.user)
-        console.log(user);
       return { user }
   },
   data() {
@@ -140,6 +137,7 @@ export default {
       currentUrl: "",
       showMenu: false,
       showUserMenu: false,
+      userImg: (this.user === null) ? '/images/user.png' : ( (this.user.avatar != null) ? this.user.avatar : '/images/user.png' )
     };
   },
   mounted: function () {

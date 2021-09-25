@@ -1,5 +1,6 @@
 <template>
     <Head title="Log in" />
+    <body class="bg-pink-lighter"/>
 
     <BreezeValidationErrors class="mb-4" />
 
@@ -26,37 +27,35 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                Forgot your password?
-            </Link>
 
-            <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <a href="/forgot-password" class="link underline">
+                Forgot your password?
+            </a>
+
+            <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class = "ml-4 btn">
                 Log in
-            </BreezeButton>
+            </button>
         </div>
     </form>
 </template>
 
 <script>
-import BreezeButton from '@/Components/Button.vue'
 import BreezeCheckbox from '@/Components/Checkbox.vue'
-import BreezeGuestLayout from '@/Layouts/Guest.vue'
+import BreezeGuestLayout from '@/Layouts/AuthBaseLayout.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     layout: BreezeGuestLayout,
 
     components: {
-        BreezeButton,
         BreezeCheckbox,
         BreezeInput,
         BreezeLabel,
         BreezeValidationErrors,
         Head,
-        Link,
     },
 
     props: {
@@ -73,7 +72,13 @@ export default {
             })
         }
     },
-
+    mounted(){
+        document.body.classList.add('bg-pink-lighter');
+    },
+    unmounted()
+    {
+        document.body.classList.remove('bg-pink-lighter');
+    },
     methods: {
         submit() {
             this.form.post(this.route('login'), {
