@@ -31,14 +31,14 @@
       </div>
 
       <!-- Avatar de usuario -->
-      <div class="flex flex-row items-center mr-2 lg:hidden" >
+      <div v-bind:class="{'lg:hidden': user === null}" class="flex flex-row items-center mr-2" >
         <button v-on:click="showHideUserMenu" class="outline-none">
           <img v-bind:class="{'border-aqua-dark':this.showUserMenu}" class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1" src="/images/user.png" alt="" />
         </button>
       </div>
 
       <!-- Login/Panel de usuario -->
-      <div class="hidden lg:flex lg:flex-row p-2 items-center">
+      <div v-bind:class="{'lg:flex lg:flex-row': user === null}" class="hidden p-2 items-center">
         <a class="mr-1 text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark" href="/register">Regístrate</a>
         <a class="mr-1 text-sm p-1 rounded-md text-pink-dark border-2 border-pink-dark
                 hover:text-white hover:border-aqua-dark hover:bg-aqua" href="/login">Iniciar Sesión</a>
