@@ -27,6 +27,11 @@ class User extends \Konekt\AppShell\Models\User
         return $this->hasMany(Project::class);
     }
 
+    public function socialMedias()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
