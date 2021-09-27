@@ -23,4 +23,8 @@
     @apply focus:border-aqua-dark focus:ring focus:ring-aqua focus:ring-opacity-50 rounded-md shadow-sm;
 }
 
+.form-label{
+    @apply block font-medium text-base;
+}
+
 @tailwind utilities;
