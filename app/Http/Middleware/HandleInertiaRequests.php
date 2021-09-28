@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -39,6 +40,9 @@ class HandleInertiaRequests extends Middleware
             ],
             'flash' =>[
                 'message' => fn() => $request->session()->get('message')
+            ],
+            'owner' => [
+                'rrss' => (User::where('web_owner', 1)->first())->socialMedias,
             ],
         ]);
     }
