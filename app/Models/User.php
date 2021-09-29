@@ -32,6 +32,10 @@ class User extends \Konekt\AppShell\Models\User
         return $this->hasMany(SocialMedia::class);
     }
 
+    public function contactLinks()
+    {
+        return $this->hasMany(ContactLinks::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

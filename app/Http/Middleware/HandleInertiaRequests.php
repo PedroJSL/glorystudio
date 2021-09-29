@@ -42,6 +42,7 @@ class HandleInertiaRequests extends Middleware
                 'message' => fn() => $request->session()->get('message')
             ],
             'owner' => [
+                'contact' => (User::where('web_owner', 1)->first())->contactLinks,
                 'rrss' => (User::where('web_owner', 1)->first())->socialMedias,
             ],
         ]);
