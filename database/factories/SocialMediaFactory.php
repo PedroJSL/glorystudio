@@ -22,7 +22,7 @@ class SocialMediaFactory extends Factory
     public function definition()
     {
         return [
-            'icon' => 'https://loremflickr.com/200/200',
+            'icon' => 'https://picsum.photos/seed/'. rand(0, 99999) .'/200',
             'url' => $this->faker->url(),
             'user_id' => 1,
         ];

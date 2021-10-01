@@ -24,7 +24,7 @@ class PostFactory extends Factory
         return [
             'name' => $this->faker->sentence(),
             'slug' => $this->faker->slug(),
-            'image' => 'https://loremflickr.com/500/500',
+            'image' => 'https://picsum.photos/seed/'. rand(0, 99999) .'/1920/1080',
             'excerpt' => $this->faker->paragraph(),
             'content' => $this->faker->paragraph(),
             'user_id' => 1,

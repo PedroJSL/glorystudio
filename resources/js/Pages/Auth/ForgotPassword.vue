@@ -5,7 +5,7 @@
         ¿Olvidaste la contraseña? No te preocupes, indícanos tu dirección email y te enviaremos un enlace para restablecer tu contraseña.
     </div>
 
-    <BreezeValidationErrors class="mb-4" />
+    <ValidationErrors class="mb-4" />
 
     <form @submit.prevent="submit">
         <div>
@@ -23,14 +23,14 @@
 
 <script>
 import AuthLayout from '@/Layouts/AuthBaseLayout.vue'
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import ValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     layout: AuthLayout,
 
     components: {
-        BreezeValidationErrors,
+        ValidationErrors,
         Head,
     },
 

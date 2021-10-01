@@ -22,7 +22,7 @@ class ContactLinksFactory extends Factory
     public function definition()
     {
         return [
-            'icon' => 'https://picsum.photos/200',
+            'icon' => 'https://picsum.photos/seed/'. rand(0, 99999) .'/200',
             'url' => $this->faker->url(),
             'slug' => $this->faker->word(),
             'user_id' => 1,

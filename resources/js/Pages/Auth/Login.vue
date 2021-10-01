@@ -2,6 +2,8 @@
     <Head title="Log in" />
     <body class="bg-pink-lighter"/>
 
+    <ValidationErrors class="mb-4" />
+
     <form @submit.prevent="submit">
         <div>
             <label class="form-label" for="email" >Correo electrónico</label>
@@ -36,14 +38,14 @@
 
 <script>
 import AuthLayout from '@/Layouts/AuthBaseLayout.vue'
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import ValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     layout: AuthLayout,
 
     components: {
-        BreezeValidationErrors,
+        ValidationErrors,
         Head,
     },
 
@@ -58,13 +60,6 @@ export default {
                 remember: false
             })
         }
-    },
-    mounted(){
-        document.body.classList.add('bg-pink-lighter');
-    },
-    unmounted()
-    {
-        document.body.classList.remove('bg-pink-lighter');
     },
     methods: {
         submit() {
