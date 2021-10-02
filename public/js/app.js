@@ -21337,63 +21337,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Esto es texto propio del index C:", -1
-/* HOISTED */
-);
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, enim laudantium. Omnis sit minima quia dolorum ipsam quidem laboriosam ipsa, dolorem a officiis, beatae velit nesciunt at saepe quam mollitia?", -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -21401,14 +21344,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Index"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_main_layout, null, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1, _hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6, _hoisted_7, _hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11, _hoisted_12, _hoisted_13, _hoisted_14];
-    }),
-    _: 1
-    /* STABLE */
-
-  })], 64
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_main_layout)], 64
   /* STABLE_FRAGMENT */
   );
 }
