@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +33,7 @@ Route::get('/about-me', function(){
     return Inertia::render('AboutMe');
 });
 
-Route::get('/portfolio', function(){
-    return Inertia::render('Portfolio');
-});
+Route::get('/portfolio', [ProjectController::class, 'showProjects']);
 
 Route::get('/blog', function(){
     return Inertia::render('Blog');
