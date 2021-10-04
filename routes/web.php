@@ -35,6 +35,8 @@ Route::get('/about-me', function(){
 
 Route::get('/portfolio', [ProjectController::class, 'showProjects']);
 
+Route::get('/portfolio/{project}', [ProjectController::class, 'getProjectBySlug']);
+
 Route::get('/blog', function(){
     return Inertia::render('Blog');
 });

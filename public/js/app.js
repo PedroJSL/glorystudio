@@ -21576,7 +21576,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onFilterChange: $options.changeFilter
       }, null, 8
       /* PROPS */
-      , ["categories", "onFilterChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n        <div class=\"w-auto rounded-md m-auto shadow-sm\">\n            <ul class=\"flex flex-row justify-center\">\n                <li id = \"0\" class=\"link ml-3\" :class=\"{'text-shadow': 0 === selected, }\" v-on:click=\"changeFilter()\">Todos</li>\n\n                <li v-on:click=\"changeFilter(category)\" :class=\"{'text-shadow': category.id === this.selected, }\" class=\"link ml-3\" v-for=\"category in categories\" :key=\"category.id\" >\n                    {{category.name}}\n                </li>\n            </ul>\n        </div>\n        "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Prueba Filtrado "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.projects, function (project) {
+      , ["categories", "onFilterChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Prueba Filtrado "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.projects, function (project) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Card, {
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
             'hidden': $data.selected != 0 && project.project_category_id != $data.selected
@@ -21589,7 +21589,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["class", "project", "category"]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n            <ul class=\"flex flex-col\">\n\n                <li :class=\"{'hidden': selected != 0 && project.project_category_id != selected }\" class=\"\" v-for=\"project in projects\" :key=\"project.id\">{{ project.name }} - Categoria: {{categories[project.project_category_id - 1].name}}</li>\n\n            </ul>\n            ")])];
+      ))])];
     }),
     _: 1
     /* STABLE */

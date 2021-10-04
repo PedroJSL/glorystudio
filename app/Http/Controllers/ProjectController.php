@@ -20,4 +20,9 @@ class ProjectController extends Controller
                                             'selected' => 0]);
     }
 
+
+    public function getProjectBySlug($slug)
+    {
+        return Inertia::render('Project', ['project' => Project::where('slug', $slug)->firstOrFail()]);
+    }
 }
