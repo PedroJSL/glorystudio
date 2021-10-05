@@ -1,9 +1,11 @@
 <template>
-    <Navbar/>
-    <main class="pt-2">
-        <slot />
-    </main>
-    <Footer/>
+    <div class="flex flex-col h-screen">
+        <Navbar/>
+        <main class="pt-2 flex-grow">
+            <slot />
+        </main>
+        <Footer/>
+    </div>
 </template>
 
 <script>

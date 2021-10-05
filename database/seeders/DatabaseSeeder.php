@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Post::factory(10)->create();
         \App\Models\SocialMedia::factory(5)->create();
         \App\Models\ContactLinks::factory(3)->create();
+
+        \App\Models\ProjectImages::factory(25)->create();
     }
 }

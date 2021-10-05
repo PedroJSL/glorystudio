@@ -15,7 +15,7 @@ class ProjectController extends Controller
 
     public function showProjects()
     {
-        return Inertia::render('Portfolio', ['categories' => ProjectCategory::all(),
+        return Inertia::render('Portfolio/Portfolio', ['categories' => ProjectCategory::all(),
                                             'projects' => Project::all(),
                                             'selected' => 0]);
     }
@@ -23,6 +23,6 @@ class ProjectController extends Controller
 
     public function getProjectBySlug($slug)
     {
-        return Inertia::render('Project', ['project' => Project::where('slug', $slug)->firstOrFail()]);
+        return Inertia::render('Portfolio/Project', ['project' => Project::where('slug', $slug)->firstOrFail()]);
     }
 }
