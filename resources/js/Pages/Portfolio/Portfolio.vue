@@ -11,7 +11,7 @@
         <Filter :categories="categories" v-on:filterChange="changeFilter"/>
 
         <!-- Prueba Filtrado -->
-        <div class="container mt-5 p-2 m-auto grid grid-cols-1 lg:grid-cols-3 gap-2">
+        <div class="container mt-5 p-2 m-auto grid grid-cols-1 lg:grid-cols-3 gap-2 justify-items-center">
             <Card :class="{'hidden': selected != 0 && project.project_category_id != selected }" v-for="project in projects" :key="project.id" :project="project" :category="categories[project.project_category_id-1]" />
         </div>
 
@@ -34,11 +34,10 @@ export default {
     props:{
         categories: {},
         projects: {},
-        selected: Number,
     },
     data(){
         return {
-            selected: this.$props.selected,
+            selected: 0,
         }
     },
     methods:{

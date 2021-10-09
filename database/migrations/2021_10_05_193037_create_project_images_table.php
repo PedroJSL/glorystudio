@@ -17,6 +17,7 @@ class CreateProjectImagesTable extends Migration
             $table->id();
             $table->string('image_url');
             $table->foreignId('project_id')->constrained();
+            $table->integer('order');
             $table->timestamps();
         });
     }

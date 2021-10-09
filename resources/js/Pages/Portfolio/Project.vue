@@ -16,15 +16,14 @@
                 <p class="p-2 text-lg flex flex-col">
                     {{project.description}}
 
-                    <span class="font-logo text-sm text-pink-dark text-right">Proyecto realizado el: {{project.project_date }}</span>
+                    <span class="font-logo text-sm text-pink-dark text-right">Proyecto realizado el: {{ formatDate(project.project_date) }}</span>
                 </p>
 
 
 
                 <!-- Slider de imágenes -->
-                <div>
+                <Carousel :images="project.images"/>
 
-                </div>
 
             </div>
 
@@ -33,16 +32,27 @@
 </template>
 <script>
     import MainLayout from '@/Layouts/MainLayout.vue';
+    import Carousel from '@/Components/Carousel.vue';
     import { Head } from '@inertiajs/inertia-vue3';
+
 
 export default {
     components:{
         MainLayout,
+        Carousel,
         Head,
     },
     props:{
         project:{},
-    }
+    },
+    methods:{
+        formatDate(dateString)
+        {
+            var date = new Date(dateString);
+            return date.toLocaleDateString('es-ES');
+        },
+
+    },
 
 }
 </script>
