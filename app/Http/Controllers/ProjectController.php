@@ -13,7 +13,7 @@ class ProjectController extends Controller
 {
     //
 
-    public function showProjects()
+    public function showAllProjects()
     {
 
         return Inertia::render('Portfolio/Portfolio', ['categories' => ProjectCategory::all(),

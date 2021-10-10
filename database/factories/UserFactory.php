@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'web_owner' => true,
             'type' => 'admin',
+            'avatar' => 'https://picsum.photos/seed/'. rand(0, 99999) .'/200',
             'biography' => $this->faker->paragraph()
         ];
     }

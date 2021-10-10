@@ -101,6 +101,10 @@
       <div v-else>
         <ul class="mb-0 p-2 shadow-sm text-right">
             <li><h2>Hola, {{ user.name }}</h2></li>
+            <li>
+                <a class="block nav-link mr-4 p-2 shadow-sm" :href="'/profile/'+ user.id">Perfil</a>
+            </li>
+
         </ul>
 
         <ul class="text-center p-2">
