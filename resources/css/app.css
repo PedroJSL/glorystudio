@@ -27,6 +27,22 @@
     @apply block font-medium text-base;
 }
 
+.btn-toolbox{
+    @apply h-5 w-5 text-pink-dark mx-1;
+}
+.btn-toolbox:hover
+{
+    @apply text-aqua-dark;
+}
+.btn-toolbox:disabled{
+    @apply text-pink-lighter cursor-default;
+}
+
+.vertical-separator{
+    @apply border-r border-pink-lighter mx-1;
+}
+
+
 @tailwind utilities;
 
 

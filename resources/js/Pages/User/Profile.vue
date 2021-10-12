@@ -34,7 +34,8 @@
 
                 <div class="mt-4">
                     <label for="biography" class="form-label text-pink-dark">Biografía</label>
-                    <textarea name="biography" id="biography" v-model="user.biography" cols="50" rows="20"></textarea>
+                    <!--textarea name="biography" id="biography" v-model="user.biography" cols="50" rows="20"></textarea-->
+                    <editor :modelValue="user.biography" />
                 </div>
 
             </form>
@@ -44,12 +45,14 @@
     </main-layout>
 </template>
 <script>
-import MainLayout from '@/Layouts/MainLayout.vue'
+import MainLayout from '@/Layouts/MainLayout.vue';
+import Editor from '@/Components/RichEditor.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     components:{
         MainLayout,
+        Editor,
         Head,
     },
     mounted(){

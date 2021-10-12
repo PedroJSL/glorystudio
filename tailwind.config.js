@@ -43,8 +43,10 @@ module.exports = {
     variants: {
         extend: {
             //opacity: ['disabled'],
-            width: ["responsive", "hover", "focus"],
-
+            width: ['responsive', 'hover', 'focus'],
+            outline: ['group-focus'],
+            opacity: ['disabled'],
+            textColor:['disabled'],
         },
     },
 
