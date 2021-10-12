@@ -35,6 +35,7 @@ export default {
   },
 
   watch: {
+
     modelValue(value) {
       const isSame = this.editor.getHTML() === value
 
@@ -44,6 +45,7 @@ export default {
 
       this.editor.commands.setContent(value, false)
     },
+
   },
 
   mounted() {
@@ -67,6 +69,8 @@ export default {
           },
       },
       onUpdate: () => {
+          console.log("Puta bida tt.");
+
         this.$emit('update:modelValue', this.editor.getHTML())
       },
     })

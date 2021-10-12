@@ -28880,6 +28880,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
+    var type = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage.props.value.flash.type;
+    });
     var message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage.props.value.flash.message;
     });
@@ -28950,6 +28953,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var click_outside_vue3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(click_outside_vue3__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Components_FlashMessage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/FlashMessage.vue */ "./resources/js/Components/FlashMessage.vue");
+
 
 
 
@@ -28957,6 +28962,9 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   directives: {
     clickOutside: (click_outside_vue3__WEBPACK_IMPORTED_MODULE_0___default().directive)
+  },
+  components: {
+    FlashMessage: _Components_FlashMessage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   setup: function setup() {
     var user = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
@@ -29107,6 +29115,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       onUpdate: function onUpdate() {
+        console.log("Puta bida tt.");
+
         _this.$emit('update:modelValue', _this.editor.getHTML());
       }
     });
@@ -29753,9 +29763,7 @@ __webpack_require__.r(__webpack_exports__);
     Editor: _Components_RichEditor_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head
   },
-  mounted: function mounted() {
-    console.table(this.user);
-  },
+  mounted: function mounted() {},
   props: {
     user: {}
   },
@@ -29763,11 +29771,16 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {
-    onAvatarChanged: function onAvatarChanged(e) {
-      var file = e.target.files[0];
-      this.user.avatar = URL.createObjectURL(file);
+    /*
+    onAvatarChanged(e){
+        const file = e.target.files[0];
+        this.user.avatar = URL.createObjectURL(file);
     },
-    submitUserData: function submitUserData() {}
+    */
+    submitUserData: function submitUserData() {
+      console.log("Modificao.");
+      console.table(this.user);
+    }
   }
 });
 
@@ -29915,17 +29928,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  "class": "p-3 bg-sky-200 border-2 border-sky-800 rounded-lg text-sky-900 w-auto abolute float-right"
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Mensaje de ejemplo ", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+    "enter-active-class": "opacity-100 duration-200",
+    "enter-class": "opacity-0",
+    "enter-to-class": "opacity-100",
+    "leave-active-class": "opacity-0 duration-300",
+    "leave-class": "opacity-100",
+    "leave-to-class": "opacity-0"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_ctx.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+        key: 0,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'success': _ctx.type == 0,
+          'info': _ctx.type == 1,
+          'error': _ctx.type == 2,
+          'warning': _ctx.type == 3
+        }, "p-3 w-auto fixed top-0 right-0 z-40 float-right rounded-lg"])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.message), 1
+      /* TEXT */
+      )], 2
+      /* CLASS */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1
+    /* STABLE */
+
+  });
 }
 
 /***/ }),
@@ -30244,9 +30274,11 @@ var _hoisted_24 = [_hoisted_23];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
+  var _component_flash_message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("flash-message");
+
   var _directive_click_outside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("click-outside");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Botón Menú "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Botón Menú "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.showHideMenu && $options.showHideMenu.apply($options, arguments);
     }),
@@ -30329,7 +30361,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )], 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu movil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Transicion:\r\n      *.- enter-class: Estado inicial\r\n      *.- enter-active-class: Animacion de entrada\r\n      *.- enter-to: Estado final tras la entrada.\r\n\r\n      *.- leave: estado inicial de salida\r\n      *.- leave-active: Animación de salida\r\n      *.- leave-to: estado final tras la salida\r\n      "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu movil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Transicion:\n      *.- enter-class: Estado inicial\n      *.- enter-active-class: Animacion de entrada\n      *.- enter-to: Estado final tras la entrada.\n\n      *.- leave: estado inicial de salida\n      *.- leave-active: Animación de salida\n      *.- leave-to: estado final tras la salida\n      "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     "enter-active-class": "transform transition duration-200",
     "enter-class": "-translate-y-1/2 scale-y-0 opacity-0",
     "enter-to-class": "translate-y-0 scale-y-100 opacity-100",
@@ -30402,7 +30434,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })], 512
   /* NEED_PATCH */
-  )), [[_directive_click_outside, $options.onClickOutside]]);
+  ), [[_directive_click_outside, $options.onClickOutside]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_flash_message)], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -31973,7 +32007,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         id: "userData",
         "class": "mt-2 flex flex-col",
-        onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("imagen de perfil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -31988,7 +32022,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         name: "avatar",
         id: "avatar",
         onChange: _cache[0] || (_cache[0] = function () {
-          return $options.onAvatarChanged && $options.onAvatarChanged.apply($options, arguments);
+          return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         })
       }, null, 32
       /* HYDRATE_EVENTS */
@@ -31999,24 +32033,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $props.user.name = $event;
         }),
-        required: ""
-      }, null, 512
-      /* NEED_PATCH */
+        required: "",
+        onChange: _cache[2] || (_cache[2] = function () {
+          return $options.submitUserData && $options.submitUserData.apply($options, arguments);
+        })
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.user.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: "email",
         type: "email",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $props.user.email = $event;
         }),
-        required: ""
-      }, null, 512
-      /* NEED_PATCH */
+        required: "",
+        onChange: _cache[4] || (_cache[4] = function () {
+          return $options.submitUserData && $options.submitUserData.apply($options, arguments);
+        })
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.user.email]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("textarea name=\"biography\" id=\"biography\" v-model=\"user.biography\" cols=\"50\" rows=\"20\"></textarea"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_editor, {
-        modelValue: $props.user.biography
+        modelValue: $props.user.biography,
+        onChange: $options.submitUserData
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])], 32
+      , ["modelValue", "onChange"])])], 32
       /* HYDRATE_EVENTS */
       )])];
     }),

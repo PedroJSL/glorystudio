@@ -13,7 +13,7 @@
                     <div class="w-1/2">
                         <h3 class="font-logo font-semibold text-lg text-pink-dark">Imagen de usuario:</h3>
                         <img class="rounded border-2 border-pink-lighter" :src="user.avatar" alt="" ref="avatarPreview">
-                        <input type="file" name="avatar" id="avatar" v-on:change="onAvatarChanged">
+                        <input type="file" name="avatar" id="avatar" v-on:change="submitUserData">
                     </div>
 
                 </div>
@@ -22,12 +22,12 @@
 
                     <div>
                         <label class = "form-label text-pink-dark" for="name"> Nombre </label>
-                        <input id="name" type="text" class="mt-1 block w-full input" v-model="user.name" required />
+                        <input id="name" type="text" class="mt-1 block w-full input" v-model="user.name" required v-on:change="submitUserData" />
                     </div>
 
                     <div class="mt-4 lg:mt-0 lg:ml-4">
                         <label class = "form-label text-pink-dark" for="email"> Correo electrónico </label>
-                        <input id="email" type="email" class="mt-1 block w-full input" v-model="user.email" required />
+                        <input id="email" type="email" class="mt-1 block w-full input" v-model="user.email" required v-on:change="submitUserData"/>
                     </div>
 
                 </div>
@@ -35,7 +35,7 @@
                 <div class="mt-4">
                     <label for="biography" class="form-label text-pink-dark">Biografía</label>
                     <!--textarea name="biography" id="biography" v-model="user.biography" cols="50" rows="20"></textarea-->
-                    <editor :modelValue="user.biography" />
+                    <editor :modelValue="user.biography" v-on:change="submitUserData" />
                 </div>
 
             </form>
@@ -56,7 +56,6 @@ export default {
         Head,
     },
     mounted(){
-        console.table(this.user);
     },
     props:
     {
@@ -67,11 +66,16 @@ export default {
         }
     },
     methods:{
+        /*
         onAvatarChanged(e){
             const file = e.target.files[0];
             this.user.avatar = URL.createObjectURL(file);
         },
+        */
         submitUserData(){
+            console.log("Modificao.");
+            console.table(this.user);
+
 
         },
     }

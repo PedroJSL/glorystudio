@@ -120,17 +120,22 @@
 
     </transition>
   </header>
+    <flash-message />
 </template>
 
 <script>
 import vClickOutside from 'click-outside-vue3';
 import { computed } from 'vue';
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/inertia-vue3';
+import FlashMessage from '@/Components/FlashMessage.vue';
 
 export default {
   props: [],
   directives:{
       clickOutside: vClickOutside.directive
+  },
+  components:{
+      FlashMessage,
   },
   setup(){
       const user = computed( () => usePage().props.value.auth.user)
