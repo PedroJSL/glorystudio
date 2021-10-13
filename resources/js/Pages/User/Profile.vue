@@ -13,7 +13,7 @@
                     <div class="w-1/2">
                         <h3 class="font-logo font-semibold text-lg text-pink-dark">Imagen de usuario:</h3>
                         <img class="rounded border-2 border-pink-lighter" :src="user.avatar" alt="" ref="avatarPreview">
-                        <input type="file" name="avatar" id="avatar" v-on:change="submitUserData" ref="avatar">
+                        <input type="file" name="avatar" @input="user.avatar = $event.target.files[0]" id="avatar" v-on:change="submitUserData" ref="avatar">
                     </div>
 
                 </div>
@@ -65,6 +65,12 @@ export default {
     data(){
         return {
             oldUser: {},
+            form: this.$inertia.form({
+                name: this.user.name,
+                email: this.user.email,
+                biography: this.user.biography,
+                avatar: this.user.avatar,
+            })
         }
     },
     methods:{
@@ -75,9 +81,7 @@ export default {
         },
         */
         submitUserData(){
-
-
-
+            this.form.put('/users/'+this.user.id);
             console.log("SubmitUserData: " + this.user.biography);
         },
     }

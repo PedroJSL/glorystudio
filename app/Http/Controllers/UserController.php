@@ -86,7 +86,7 @@ class UserController extends Controller
             $request->session()->flash('message', 'Imagen modificada correctamente');
             $request->session()->flash('message_type', '0');
         }
-        return Redirect::route('profile/'.$user->id);
+        return Redirect::route('/profile/'.$user->id);
     }
 
     /**

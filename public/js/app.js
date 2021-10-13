@@ -29787,7 +29787,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      oldUser: {}
+      oldUser: {},
+      form: this.$inertia.form({
+        name: this.user.name,
+        email: this.user.email,
+        biography: this.user.biography,
+        avatar: this.user.avatar
+      })
     };
   },
   methods: {
@@ -29798,6 +29804,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     */
     submitUserData: function submitUserData() {
+      this.form.put('/users/' + this.user.id);
       console.log("SubmitUserData: " + this.user.biography);
     }
   }
@@ -32031,7 +32038,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         id: "userData",
         "class": "mt-2 flex flex-col",
-        onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("imagen de perfil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -32044,8 +32051,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "file",
         name: "avatar",
+        onInput: _cache[0] || (_cache[0] = function ($event) {
+          return $props.user.avatar = $event.target.files[0];
+        }),
         id: "avatar",
-        onChange: _cache[0] || (_cache[0] = function () {
+        onChange: _cache[1] || (_cache[1] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }),
         ref: "avatar"
@@ -32055,11 +32065,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "name",
         type: "text",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $props.user.name = $event;
         }),
         required: "",
-        onChange: _cache[2] || (_cache[2] = function () {
+        onChange: _cache[3] || (_cache[3] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }),
         disabled: $data.oldUser.name === $props.user.name
@@ -32069,11 +32079,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "email",
         type: "email",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $props.user.email = $event;
         }),
         required: "",
-        onChange: _cache[4] || (_cache[4] = function () {
+        onChange: _cache[5] || (_cache[5] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }),
         disabled: $data.oldUser.email === $props.user.email
@@ -32081,7 +32091,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.user.email]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("textarea name=\"biography\" id=\"biography\" v-model=\"user.biography\" cols=\"50\" rows=\"20\"></textarea"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_editor, {
         modelValue: $props.user.biography,
-        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $props.user.biography = $event;
         }),
         onEditorBlur: $options.submitUserData
