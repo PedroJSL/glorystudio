@@ -16,6 +16,7 @@ export default {
     props:{
         categories: {},
     },
+    emits:['filterChange'],
     data(){
         return {
             selected: 0,

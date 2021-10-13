@@ -2,7 +2,7 @@
     <Head :title="user.name"/>
     <main-layout>
 
-        <div class="container flex flex-col p-4">
+        <div class="container flex flex-col p-4 mx-auto">
 
             <h2 class="font-logo font-semibold text-2xl text-pink-dark border-b-2 border-pink">Perfil de usuario</h2>
 
@@ -13,7 +13,7 @@
                     <div class="w-1/2">
                         <h3 class="font-logo font-semibold text-lg text-pink-dark">Imagen de usuario:</h3>
                         <img class="rounded border-2 border-pink-lighter" :src="user.avatar" alt="" ref="avatarPreview">
-                        <input type="file" name="avatar" id="avatar" v-on:change="submitUserData">
+                        <input type="file" name="avatar" id="avatar" v-on:change="submitUserData" ref="avatar">
                     </div>
 
                 </div>
@@ -22,12 +22,12 @@
 
                     <div>
                         <label class = "form-label text-pink-dark" for="name"> Nombre </label>
-                        <input id="name" type="text" class="mt-1 block w-full input" v-model="user.name" required v-on:change="submitUserData" />
+                        <input id="name" type="text" class="mt-1 block w-full input" v-model="user.name" required v-on:change="submitUserData" :disabled="oldUser.name === user.name" />
                     </div>
 
                     <div class="mt-4 lg:mt-0 lg:ml-4">
                         <label class = "form-label text-pink-dark" for="email"> Correo electrónico </label>
-                        <input id="email" type="email" class="mt-1 block w-full input" v-model="user.email" required v-on:change="submitUserData"/>
+                        <input id="email" type="email" class="mt-1 block w-full input" v-model="user.email" required v-on:change="submitUserData" :disabled="oldUser.email === user.email" />
                     </div>
 
                 </div>
@@ -35,9 +35,9 @@
                 <div class="mt-4">
                     <label for="biography" class="form-label text-pink-dark">Biografía</label>
                     <!--textarea name="biography" id="biography" v-model="user.biography" cols="50" rows="20"></textarea-->
-                    <editor :modelValue="user.biography" v-on:change="submitUserData" />
+                    <editor v-model="user.biography" v-on:editorBlur="submitUserData"/>
+                    <input id="biography" type = "text" value = "user.biography" hidden :disabled="oldUser.biography === user.biography"/>
                 </div>
-
             </form>
 
         </div>
@@ -56,6 +56,7 @@ export default {
         Head,
     },
     mounted(){
+        this.oldUser = this.user;
     },
     props:
     {
@@ -63,6 +64,7 @@ export default {
     },
     data(){
         return {
+            oldUser: {},
         }
     },
     methods:{
@@ -73,10 +75,10 @@ export default {
         },
         */
         submitUserData(){
-            console.log("Modificao.");
-            console.table(this.user);
 
 
+
+            console.log("SubmitUserData: " + this.user.biography);
         },
     }
 }

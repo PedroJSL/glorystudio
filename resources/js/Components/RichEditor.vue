@@ -1,7 +1,8 @@
 <template>
-    <editor-menu :editor="editor" :allowImages="false"/>
-
-    <editor-content :editor="editor" />
+    <div  v-click-outside="onClickOutside">
+        <editor-menu :editor="editor" :allowImages="false"/>
+        <editor-content :editor="editor" />
+    </div>
 </template>
 
 <script>
@@ -10,6 +11,8 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import Align from '@tiptap/extension-text-align'
 import EditorMenu from '@/Components/RichEditorMenu.vue'
+import vClickOutside from 'click-outside-vue3';
+
 
 import OrderedList from '@tiptap/extension-ordered-list'
 import BulletList from '@tiptap/extension-bullet-list'
@@ -20,14 +23,16 @@ export default {
     EditorContent,
     EditorMenu,
   },
-
+  directives:{
+      clickOutside: vClickOutside.directive
+  },
   props: {
     modelValue: {
       type: String,
       default: '',
     },
   },
-
+    emits:["update:modelValue", "editorBlur"],
   data() {
     return {
       editor: null,
@@ -35,17 +40,13 @@ export default {
   },
 
   watch: {
-
     modelValue(value) {
-      const isSame = this.editor.getHTML() === value
-
-      if (isSame) {
-        return
-      }
-
-      this.editor.commands.setContent(value, false)
+        const isSame = this.editor.getHTML() === value;
+        if (isSame) {
+            return;
+        }
+        this.editor.commands.setContent(value, false);
     },
-
   },
 
   mounted() {
@@ -69,13 +70,15 @@ export default {
           },
       },
       onUpdate: () => {
-          console.log("Puta bida tt.");
-
         this.$emit('update:modelValue', this.editor.getHTML())
       },
     })
   },
-
+  methods:{
+    onClickOutside(event){
+        this.$emit('editorBlur','');
+    },
+  },
   beforeUnmount() {
     this.editor.destroy()
   },

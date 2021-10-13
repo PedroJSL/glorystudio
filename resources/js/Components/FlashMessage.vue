@@ -22,8 +22,9 @@ import { usePage } from '@inertiajs/inertia-vue3'
 
 export default {
     setup(){
-        const type = computed(() => usePage.props.value.flash.type)
-        const message = computed(() => usePage.props.value.flash.message )
+        const type = computed(() => usePage().props.value.flash.type);
+        const message = computed(() => usePage().props.value.flash.message );
+        return{ type, message}
     }
 }
 </script>
