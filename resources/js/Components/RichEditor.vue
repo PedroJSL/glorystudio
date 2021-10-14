@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       editor: null,
+      focused: false,
     }
   },
 
@@ -69,6 +70,9 @@ export default {
               class: 'border p-2 focus:outline-none focus:border-aqua-dark focus:ring focus:ring-aqua focus:ring-opacity-50 rounded-md shadow-sm',
           },
       },
+      onFocus: () => {
+          this.focused = true;
+      },
       onUpdate: () => {
         this.$emit('update:modelValue', this.editor.getHTML())
       },
@@ -76,7 +80,11 @@ export default {
   },
   methods:{
     onClickOutside(event){
-        this.$emit('editorBlur','');
+        if(this.focused)
+        {
+            this.focused = false;
+            this.$emit('editorBlur','');
+        }
     },
   },
   beforeUnmount() {

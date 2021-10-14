@@ -28891,6 +28891,33 @@ __webpack_require__.r(__webpack_exports__);
       type: type,
       message: message
     };
+  },
+  watch: {
+    message: function message(val) {
+      if (val != this.msg) {
+        this.show = false;
+      }
+
+      if (!this.show) {
+        if (this.tout != null) clearTimeout(this.tout);
+        this.show = true;
+        this.tout = setTimeout(this.close, 5000);
+        this.msg = this.message;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      show: false,
+      tout: null,
+      msg: null
+    };
+  },
+  methods: {
+    close: function close() {
+      this.show = false;
+      this.$inertia.reload();
+    }
   }
 });
 
@@ -28983,8 +29010,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentUrl: "",
       showMenu: false,
-      showUserMenu: false,
-      userImg: this.user === null ? '/images/user.png' : this.user.avatar != null ? this.user.avatar : '/images/user.png'
+      showUserMenu: false
     };
   },
   mounted: function mounted() {
@@ -29097,7 +29123,8 @@ __webpack_require__.r(__webpack_exports__);
   emits: ["update:modelValue", "editorBlur"],
   data: function data() {
     return {
-      editor: null
+      editor: null,
+      focused: false
     };
   },
   watch: {
@@ -29126,6 +29153,9 @@ __webpack_require__.r(__webpack_exports__);
           "class": 'border p-2 focus:outline-none focus:border-aqua-dark focus:ring focus:ring-aqua focus:ring-opacity-50 rounded-md shadow-sm'
         }
       },
+      onFocus: function onFocus() {
+        _this.focused = true;
+      },
       onUpdate: function onUpdate() {
         _this.$emit('update:modelValue', _this.editor.getHTML());
       }
@@ -29133,7 +29163,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onClickOutside: function onClickOutside(event) {
-      this.$emit('editorBlur', '');
+      if (this.focused) {
+        this.focused = false;
+        this.$emit('editorBlur', '');
+      }
     }
   },
   beforeUnmount: function beforeUnmount() {
@@ -29779,33 +29812,51 @@ __webpack_require__.r(__webpack_exports__);
     Editor: _Components_RichEditor_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head
   },
-  mounted: function mounted() {
-    this.oldUser = this.user;
-  },
   props: {
     user: {}
   },
   data: function data() {
     return {
-      oldUser: {},
+      imageForm: this.$inertia.form({
+        avatar: '',
+        user_id: this.user.id
+      }),
       form: this.$inertia.form({
         name: this.user.name,
         email: this.user.email,
-        biography: this.user.biography,
-        avatar: this.user.avatar
+        biography: this.user.biography
       })
     };
   },
   methods: {
-    /*
-    onAvatarChanged(e){
-        const file = e.target.files[0];
-        this.user.avatar = URL.createObjectURL(file);
+    onAvatarChanged: function onAvatarChanged(e) {
+      var file = e.target.files[0];
+      this.user.avatar = URL.createObjectURL(file);
     },
-    */
+    updateImage: function updateImage() {
+      var _this = this;
+
+      if (this.$refs.avatar) {
+        this.imageForm.avatar = this.$refs.avatar.files[0];
+      }
+
+      this.imageForm.post(this.route('user.update.image'), {
+        preserveScroll: true,
+        onSuccess: function onSuccess() {
+          return _this.$refs.avatar.value = null;
+        }
+      });
+    },
     submitUserData: function submitUserData() {
-      this.form.put('/users/' + this.user.id);
-      console.log("SubmitUserData: " + this.user.biography);
+      var _this2 = this;
+
+      this.form.biography = this.user.biography;
+      this.form.put(this.route('user.update', this.user.id), {
+        preserveScroll: true,
+        onFinish: function onFinish() {
+          return _this2.form.reset();
+        }
+      });
     }
   }
 });
@@ -29954,6 +30005,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "p-3"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     "enter-active-class": "opacity-100 duration-200",
@@ -29964,19 +30018,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "leave-to-class": "opacity-0"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [$setup.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-        key: 0,
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
           'success': $setup.type == 0,
           'info': $setup.type == 1,
           'error': $setup.type == 2,
           'warning': $setup.type == 3
-        }, "p-3 w-auto fixed top-0 right-0 z-40 float-right rounded-lg"])
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.message), 1
+        }, "w-auto fixed top-14 right-5 z-40 float-right rounded-lg opacity-75"])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.message), 1
       /* TEXT */
       )], 2
       /* CLASS */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.message]])];
     }),
     _: 1
     /* STABLE */
@@ -30373,7 +30426,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
       'border-aqua-dark': this.showUserMenu
     }, "w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1"]),
-    src: $data.userImg,
+    src: this.user === null ? '/images/user.png' : this.user.avatar != null ? this.user.avatar : '/images/user.png',
     alt: ""
   }, null, 10
   /* CLASS, PROPS */
@@ -31973,10 +32026,10 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_3 = {
-  "class": "flex flex-col lg:flex-row"
+  "class": "flex flex-row p-4 justify-between items-center"
 };
 var _hoisted_4 = {
-  "class": "w-1/2"
+  "class": "w-5/12"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
@@ -31986,30 +32039,38 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_6 = ["src"];
-var _hoisted_7 = {
+var _hoisted_7 = ["value"];
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "btn block ml-5 h-20 align-middle",
+  type: "submit",
+  value: "Actualizar Imagen"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
   "class": "flex flex-col lg:flex-row mt-4"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "form-label text-pink-dark",
   "for": "name"
 }, " Nombre ", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = ["disabled"];
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "mt-4 lg:mt-0 lg:ml-4"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "form-label text-pink-dark",
   "for": "email"
 }, " Correo electrónico ", -1
 /* HOISTED */
 );
 
-var _hoisted_12 = ["disabled"];
 var _hoisted_13 = {
   "class": "mt-4"
 };
@@ -32021,7 +32082,6 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_15 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -32036,13 +32096,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_main_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        id: "userData",
-        "class": "mt-2 flex flex-col",
-        onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.submitUserData && $options.submitUserData.apply($options, arguments);
+        id: "updateImage",
+        "class": "mt-2",
+        onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $options.updateImage && $options.updateImage.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("imagen de perfil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-        "class": "rounded border-2 border-pink-lighter",
+        "class": "rounded w-full border-2 border-pink-lighter my-auto",
         src: $props.user.avatar,
         alt: "",
         ref: "avatarPreview"
@@ -32051,61 +32111,81 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "file",
         name: "avatar",
-        onInput: _cache[0] || (_cache[0] = function ($event) {
-          return $props.user.avatar = $event.target.files[0];
-        }),
         id: "avatar",
-        onChange: _cache[1] || (_cache[1] = function () {
+        onChange: _cache[0] || (_cache[0] = function () {
+          return $options.onAvatarChanged && $options.onAvatarChanged.apply($options, arguments);
+        }),
+        onBlur: _cache[1] || (_cache[1] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }),
         ref: "avatar"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "hidden",
+        name: "user_id",
+        value: $props.user.id
+      }, null, 8
+      /* PROPS */
+      , _hoisted_7), _hoisted_8])], 32
+      /* HYDRATE_EVENTS */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        id: "userData",
+        "class": "mt-2 flex flex-col",
+        onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $options.submitUserData && $options.submitUserData.apply($options, arguments);
+        }, ["prevent"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: "name",
         type: "text",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return $props.user.name = $event;
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $data.form.name = $event;
         }),
         required: "",
-        onChange: _cache[3] || (_cache[3] = function () {
+        onBlur: _cache[4] || (_cache[4] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
-        }),
-        disabled: $data.oldUser.name === $props.user.name
-      }, null, 40
-      /* PROPS, HYDRATE_EVENTS */
-      , _hoisted_9), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.user.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        })
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name, void 0, {
+        lazy: true
+      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: "email",
         type: "email",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return $props.user.email = $event;
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $data.form.email = $event;
         }),
         required: "",
-        onChange: _cache[5] || (_cache[5] = function () {
+        onBlur: _cache[6] || (_cache[6] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
-        }),
-        disabled: $data.oldUser.email === $props.user.email
-      }, null, 40
-      /* PROPS, HYDRATE_EVENTS */
-      , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.user.email]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("textarea name=\"biography\" id=\"biography\" v-model=\"user.biography\" cols=\"50\" rows=\"20\"></textarea"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_editor, {
+        })
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.email, void 0, {
+        lazy: true
+      }]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("textarea name=\"biography\" id=\"biography\" v-model=\"user.biography\" cols=\"50\" rows=\"20\"></textarea"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_editor, {
         modelValue: $props.user.biography,
-        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
           return $props.user.biography = $event;
         }),
         onEditorBlur: $options.submitUserData
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onEditorBlur"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      , ["modelValue", "onEditorBlur"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         id: "biography",
-        type: "text",
-        value: "user.biography",
-        hidden: "",
-        disabled: $data.oldUser.biography === $props.user.biography
-      }, null, 8
-      /* PROPS */
-      , _hoisted_15)])], 32
+        type: "hidden",
+        name: "biography",
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+          return $data.form.biography = $event;
+        }),
+        ref: "biography"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.biography, void 0, {
+        lazy: true
+      }]])])], 32
       /* HYDRATE_EVENTS */
       )])];
     }),
@@ -74960,7 +75040,7 @@ function keyName(event) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"E:\\\\Desarrollo\\\\Laravel\\\\glorystudio","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","/Users/pedrojsl/Documents/Desarrollo/Web/glorystudio"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"/Users/pedrojsl/Documents/Desarrollo/Web/glorystudio","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

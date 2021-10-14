@@ -44,8 +44,9 @@ Route::get('/contact', function(){
 
 
 //Rutas para usuario registrado
-Route::get('/profile/{id}', [UserController::class, 'index']);
+Route::get('/profile/{id}', [UserController::class, 'index'])->name('user.profile');
 
-Route::put('/users/{id}', [UserController::class, 'update']);
+Route::post('/profile/updateImage', [UserController::class, 'updateImage'])->name('user.update.image');
+Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 
 require __DIR__.'/auth.php';

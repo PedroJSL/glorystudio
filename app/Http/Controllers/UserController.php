@@ -70,23 +70,24 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
-        if($request->hasFile('avatar'))
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->biography = $request->biography;
+        if($user->save())
         {
-            if($request->file('avatar')->isValid())
-            {
-                $path = $request->avatar->store(public_path() . "user_".$user->id . "/", 's3');
-                $user->avatar = $path;
-            }
-        }
-
-        if($user->save()){
-            $request->session()->flash('message', 'Imagen modificada correctamente');
+            $request->session()->flash('message', 'Datos actualizados correctamente.');
             $request->session()->flash('message_type', '0');
         }
-        return Redirect::route('/profile/'.$user->id);
+        else
+        {
+            $request->session()->flash('message', 'Error al actualizar datos.');
+            $request->session()->flash('message_type', '2');
+        }
+        return Redirect::route('user.profile', [$id]);
     }
 
     /**
@@ -98,5 +99,46 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+
+    public function updateImage(Request $request)
+    {
+        //
+        $user = User::find($request->user_id);
+
+        if($request->hasFile('avatar'))
+        {
+            if($request->file('avatar')->isValid())
+            {
+                $imageName = time().'.'.$request->avatar->extension();
+                $path = '/images/user_'.$user->id . '/'. $imageName;
+                $request->avatar->move(public_path('images/user_'.$user->id), $imageName);
+                $user->avatar = $path;
+
+                if($user->save()){
+                    $request->session()->flash('message', 'Imagen modificada correctamente');
+                    $request->session()->flash('message_type', '0');
+                }
+                else
+                {
+                    $request->session()->flash('message', 'Error al modificar la imagen');
+                    $request->session()->flash('message_type', '2');
+                }
+            }
+            else
+            {
+                $request->session()->flash('message', 'Imagen no válida');
+                $request->session()->flash('message_type', '2');
+            }
+
+        }
+        else
+        {
+            $request->session()->flash('message', 'No se ha seleccionado ninguna imagen');
+            $request->session()->flash('message_type', '1');
+        }
+
+        return Redirect::route('user.profile', [$request->user_id]);
     }
 }

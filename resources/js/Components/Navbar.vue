@@ -34,7 +34,7 @@
       <!-- Avatar de usuario -->
       <div v-bind:class="{'lg:hidden': user === null}" class="flex flex-row items-center mr-2" >
         <button v-on:click="showHideUserMenu" class="outline-none">
-          <img v-bind:class="{'border-aqua-dark':this.showUserMenu}" class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1"  :src="userImg" alt="" />
+          <img v-bind:class="{'border-aqua-dark':this.showUserMenu}" class="w-9 rounded-full border-2 border-pink hover:border-pink-dark p-1"  :src="(this.user === null) ? '/images/user.png' : ( (this.user.avatar != null) ? this.user.avatar : '/images/user.png' )" alt="" />
         </button>
       </div>
 
@@ -146,7 +146,6 @@ export default {
       currentUrl: "",
       showMenu: false,
       showUserMenu: false,
-      userImg: (this.user === null) ? '/images/user.png' : ( (this.user.avatar != null) ? this.user.avatar : '/images/user.png' )
     };
   },
   mounted: function () {
