@@ -1,5 +1,5 @@
 <template>
-    <div v-if="editor" class="flex flex-row justify-center my-2 p-2 px-4 rounded shadow-md">
+    <div v-if="editor" class="flex flex-row justify-center lg:justify-start my-2 p-2 px-4 rounded shadow-md">
         <button type="button" class = "btn-toolbox" v-on:click="undo" :disabled="!editor.can().undo()">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />

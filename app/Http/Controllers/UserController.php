@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index($id)
     {
-        return Inertia::render("User/Profile", ["user"=> User::find($id)->load('experience')->load('projects')->load('socialMedias')->load('contactLinks')]);
+        return Inertia::render("User/Profile", ["user"=> User::find($id)->load('socialMedias')->load('contactLinks')]);
     }
 
     /**
@@ -72,11 +72,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if($request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+        ]));
+
         //
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->biography = $request->biography;
+        $user->allowMails = $request->allowMails;
         if($user->save())
         {
             $request->session()->flash('message', 'Datos actualizados correctamente.');

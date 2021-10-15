@@ -27,4 +27,9 @@ class ProjectController extends Controller
         $images = $project->images;
         return Inertia::render('Portfolio/Project', ['project' => $project, 'images' =>$images]);
     }
+
+    public function showNewProjectForm()
+    {
+        return Inertia::render('Portfolio/NewProject');
+    }
 }

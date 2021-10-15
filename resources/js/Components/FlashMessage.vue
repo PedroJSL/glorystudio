@@ -24,7 +24,7 @@ export default {
     setup(){
         const type = computed(() => usePage().props.value.flash.type);
         const message = computed(() => usePage().props.value.flash.message );
-        return{ type, message}
+        return{ type, message }
     },
     watch:{
         message(val)

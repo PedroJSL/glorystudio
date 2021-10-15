@@ -21,13 +21,18 @@
                 </div>
             </div>
 
+
+
             <!-- Enlaces de Redes sociales-->
             <h2 class="text-pink-dark font-logo mt-4">Puedes seguirme en</h2>
+
             <div class="flex flex-row justify-between ">
                 <div v-for="rs in owner.rrss" :key="rs.id">
                     <a :href = "rs.url" > <img :src = "rs.icon" class="w-10 rounded-full shadow-md m-2 opacity-75 hover:opacity-100"> </a>
                 </div>
+
             </div>
+
         </div>
 
         <!-- Formulario de contacto, solo visible en pantallas grandes -->
@@ -64,10 +69,11 @@
 
     <div class="flex p-3 justify-end">
 
+        <!--
         <a href="#" class="link underline font-logo">Aviso Legal</a>
         <a href="#" class="link underline font-logo">Términos y Condiciones</a>
         <a href="#" class="link underline font-logo mr-8">Política de Cookies</a>
-
+        -->
         <p class="text-sm font-logo text-pink-dark">©2021, Glory Studio. Todos los derechos reservados.</p>
     </div>
 </footer>

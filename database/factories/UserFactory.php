@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'web_owner' => true,
             'type' => 'admin',
             'avatar' => 'https://picsum.photos/seed/'. rand(0, 99999) .'/200',
-            'biography' => $this->faker->paragraph()
+            'biography' => $this->faker->paragraph(),
         ];
     }
 

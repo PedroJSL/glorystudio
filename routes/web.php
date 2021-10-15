@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\ContactLinksController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,23 +30,27 @@ Route::get('/about-me', function(){
 Route::get('/portfolio', [ProjectController::class, 'showAllProjects']);
 Route::get('/portfolio/{project}', [ProjectController::class, 'getProjectBySlug']);
 
+Route::get('/portfolio/project/new', [ProjectController::class, 'showNewProjectForm'])->middleware('auth');
+
+
+
 //Rutas del apartado de blog
 Route::get('/blog', [PostController::class, 'showAllPosts']);
 
-
+/*
 Route::get('/shop', function(){
     return Inertia::render('Shop');
 });
-
-Route::get('/contact', function(){
-    return Inertia::render('Contact');
-});
-
+*/
 
 //Rutas para usuario registrado
-Route::get('/profile/{id}', [UserController::class, 'index'])->name('user.profile');
+Route::get('/profile/{id}', [UserController::class, 'index'])->name('user.profile')->middleware('auth');
 
-Route::post('/profile/updateImage', [UserController::class, 'updateImage'])->name('user.update.image');
-Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::post('/profile/updateImage', [UserController::class, 'updateImage'])->name('user.update.image')->middleware('auth');
+Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update')->middleware('auth');
+
+//Modificacion de los enlaces de contacto
+Route::post('/contact_link/delete', [ContactLinksController::class, 'delete'])->name('contact.delete')->middleware('auth');
+Route::post('/contact_link/update_icon', [ContactLinksController::class, 'updateIcon'])->name('contact.update_icon')->middleware('auth');
 
 require __DIR__.'/auth.php';

@@ -104,6 +104,9 @@
             <li>
                 <a class="block nav-link mr-4 p-2 shadow-sm" :href="'/profile/'+ user.id">Perfil</a>
             </li>
+            <li v-if="user.web_owner">
+                <a class="block nav-link mr-4 p-2 shadow-sm" href="/portfolio/project/new"> Añadir Proyecto </a>
+            </li>
 
         </ul>
 
