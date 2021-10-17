@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
+use Illuminate\Support\Facades\Log;
+
+use function Psy\debug;
 
 class UserController extends Controller
 {
@@ -72,18 +75,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        if($request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-        ]));
-
-        //
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->biography = $request->biography;
-        $user->allowMails = $request->allowMails;
+
+        if($request->hasFile('avatar'))
+        {
+            if($request->validate([
+                'avatar' => 'image|dimensions:min_width=200,min_height=200'
+            ]));
+
+            if($request->file('avatar')->isValid())
+            {
+                $imageName = time().'.'.$request->avatar->extension();
+                $path = '/images/user_'.$user->id . '/'. $imageName;
+                $request->avatar->move(public_path('images/user_'.$user->id), $imageName);
+                $user->avatar = $path;
+            }
+        }
+        else
+        {
+            if($request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|email|max:255',
+            ]));
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->biography = $request->biography;
+            $user->allowMails = $request->allowMails;
+        }
+
         if($user->save())
         {
             $request->session()->flash('message', 'Datos actualizados correctamente.');
@@ -108,7 +128,7 @@ class UserController extends Controller
         //
     }
 
-
+    /*
     public function updateImage(Request $request)
     {
         //
@@ -148,4 +168,5 @@ class UserController extends Controller
 
         return Redirect::route('user.profile', [$request->user_id]);
     }
+    */
 }

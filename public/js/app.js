@@ -29826,73 +29826,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      imageForm: this.$inertia.form({
+      userForm: this.$inertia.form({
         avatar: '',
-        user_id: this.user.id
-      }),
-      form: this.$inertia.form({
         name: this.user.name,
         email: this.user.email,
         allowMails: this.user.allowMails,
         biography: this.user.biography
       }),
-      formPwd: this.$inertia.form({
+      changePwd: this.$inertia.form({
         email: this.user.email
-      }),
-      formDeleteLink: this.$inertia.form({
-        id: ''
-      }),
-      iconForm: this.$inertia.form({
-        icon: '',
-        id: ''
       })
     };
   },
   methods: {
-    onAvatarChanged: function onAvatarChanged(e) {
-      var file = e.target.files[0];
-      this.user.avatar = URL.createObjectURL(file);
-    },
-    updateImage: function updateImage() {
+    submitUserData: function submitUserData() {
       var _this = this;
 
-      if (this.$refs.avatar) {
-        this.imageForm.avatar = this.$refs.avatar.files[0];
+      if (this.userForm.isDirty) {
+        //this.userForm.biography = this.user.biography;
+        this.userForm.post(this.route('user.update', this.user.id), {
+          preserveScroll: true,
+          onFinish: function onFinish() {
+            return _this.userForm.reset();
+          }
+        });
       }
-
-      this.imageForm.post(this.route('user.update.image'), {
-        preserveScroll: true,
-        onSuccess: function onSuccess() {
-          return _this.$refs.avatar.value = null;
-        }
-      });
-    },
-    submitUserData: function submitUserData() {
-      var _this2 = this;
-
-      this.form.biography = this.user.biography;
-      this.form.put(this.route('user.update', this.user.id), {
-        preserveScroll: true,
-        onFinish: function onFinish() {
-          return _this2.form.reset();
-        }
-      });
     },
     resetPassword: function resetPassword() {
-      this.formPwd.post(this.route('password.email'));
-    },
-    deleteContact: function deleteContact() {
-      this.formDeleteLink.id = this.$refs.linkId.value;
-      this.formDeleteLink.post(this.route('contact.delete'), {
-        preserveScroll: true
-      });
-    },
-    updateIcon: function updateIcon(e, id) {
-      this.iconForm.icon = e.target.files[0];
-      this, iconForm.id = id;
-      this.iconForm.post(this.route('contact.update_icon'), {
-        preserveScroll: true
-      });
+      this.changePwd.post(this.route('password.email'));
     }
   }
 });
@@ -32081,69 +32042,81 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_6 = ["src"];
-var _hoisted_7 = ["value"];
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "btn block ml-5 h-20 align-middle",
-  type: "submit",
-  value: "Actualizar Imagen"
-}, null, -1
-/* HOISTED */
-);
-
+var _hoisted_7 = {
+  key: 0
+};
+var _hoisted_8 = {
+  "class": "text-red-800"
+};
 var _hoisted_9 = {
-  "class": "flex flex-col lg:flex-row mt-4"
+  "class": "flex flex-col lg:flex-row mt-2"
 };
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "form-label text-pink-dark",
+  "class": "form-label font-semibold text-lg text-pink-dark",
   "for": "name"
 }, " Nombre ", -1
 /* HOISTED */
 );
 
 var _hoisted_11 = {
+  key: 0
+};
+var _hoisted_12 = {
+  "class": "text-red-800"
+};
+var _hoisted_13 = {
   "class": "mt-4 lg:mt-0 lg:ml-4"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "form-label text-pink-dark",
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-label font-semibold text-lg text-pink-dark",
   "for": "email"
 }, " Correo electrónico ", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
-  key: 0,
-  "class": "mt-4"
+var _hoisted_15 = {
+  key: 0
 };
-var _hoisted_14 = {
+var _hoisted_16 = {
+  "class": "text-red-800"
+};
+var _hoisted_17 = {
+  key: 0,
+  "class": "mt-2"
+};
+var _hoisted_18 = {
   "class": "flex items-center"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "ml-2 text-md"
 }, "Permitir correos de notificación", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_20 = {
   "class": "mt-4"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "biography",
-  "class": "form-label text-pink-dark"
+  "class": "form-label font-semibold text-lg text-pink-dark"
 }, "Biografía", -1
 /* HOISTED */
 );
 
-var _hoisted_18 = ["value"];
-var _hoisted_19 = ["disabled"];
+var _hoisted_22 = {
+  key: 0
+};
+var _hoisted_23 = {
+  "class": "text-red-800"
+};
+var _hoisted_24 = ["value"];
+var _hoisted_25 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
-
-  var _component_ValidationErrors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ValidationErrors");
 
   var _component_editor = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("editor");
 
@@ -32156,12 +32129,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_main_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        id: "updateImage",
+        ref: "userUpdateForm",
         "class": "mt-2",
-        onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.updateImage && $options.updateImage.apply($options, arguments);
+        onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return _ctx.updateImage && _ctx.updateImage.apply(_ctx, arguments);
         }, ["prevent"]))
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("imagen de perfil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("imagen de perfil "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
         "class": "rounded w-full border-2 border-pink-lighter my-auto",
         src: $props.user.avatar,
         alt: "",
@@ -32170,116 +32143,97 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "file",
+        "class": "mt-2",
         name: "avatar",
-        id: "avatar",
-        onChange: _cache[0] || (_cache[0] = function () {
-          return $options.onAvatarChanged && $options.onAvatarChanged.apply($options, arguments);
+        onInput: _cache[0] || (_cache[0] = function ($event) {
+          return $data.userForm.avatar = $event.target.files[0];
         }),
-        onBlur: _cache[1] || (_cache[1] = function () {
+        onChange: _cache[1] || (_cache[1] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }),
         ref: "avatar"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "hidden",
-        name: "user_id",
-        value: $props.user.id
-      }, null, 8
-      /* PROPS */
-      , _hoisted_7), _hoisted_8])], 32
-      /* HYDRATE_EVENTS */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ValidationErrors, {
-        "class": "mb-4"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        id: "userData",
-        "class": "mt-2 flex flex-col",
-        onSubmit: _cache[11] || (_cache[11] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-          return $options.submitUserData && $options.submitUserData.apply($options, arguments);
-        }, ["prevent"]))
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        id: "name",
+      ), $data.userForm.errors.avatar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.userForm.errors.avatar), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        ref: "name",
         type: "text",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.form.name = $event;
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.userForm.name = $event;
         }),
         required: "",
-        onBlur: _cache[4] || (_cache[4] = function () {
+        onChange: _cache[3] || (_cache[3] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         })
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.name, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.name, void 0, {
         lazy: true
-      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        id: "email",
+      }]]), $data.userForm.errors.name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.userForm.errors.name), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        ref: "email",
         type: "email",
         "class": "mt-1 block w-full input",
-        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-          return $data.form.email = $event;
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.userForm.email = $event;
         }),
         required: "",
-        onBlur: _cache[6] || (_cache[6] = function () {
+        onChange: _cache[5] || (_cache[5] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         })
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.email, void 0, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.email, void 0, {
         lazy: true
-      }]])])]), !$props.user.web_owner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }]]), $data.userForm.errors.email ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.userForm.errors.email), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), !$props.user.web_owner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        ref: "allowMails",
         type: "checkbox",
-        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-          return $data.form.allowMails = $event;
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+          return $data.userForm.allowMails = $event;
         }),
         name: "allowMails",
-        onChange: _cache[8] || (_cache[8] = function () {
+        onChange: _cache[7] || (_cache[7] = function () {
           return $options.submitUserData && $options.submitUserData.apply($options, arguments);
         }),
         "class": "rounded text-aqua shadow-sm focus:border-aqua-dark focus:ring focus:ring-aqua-light focus:ring-opacity-50"
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.form.allowMails]]), _hoisted_15])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("textarea name=\"biography\" id=\"biography\" v-model=\"user.biography\" cols=\"50\" rows=\"20\"></textarea"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_editor, {
-        modelValue: $props.user.biography,
-        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-          return $props.user.biography = $event;
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.userForm.allowMails]]), _hoisted_19])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_editor, {
+        modelValue: $data.userForm.biography,
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+          return $data.userForm.biography = $event;
         }),
         onEditorBlur: $options.submitUserData
       }, null, 8
       /* PROPS */
-      , ["modelValue", "onEditorBlur"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        id: "biography",
-        type: "hidden",
-        name: "biography",
-        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-          return $data.form.biography = $event;
-        }),
-        ref: "biography"
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.biography, void 0, {
-        lazy: true
-      }]])])], 32
-      /* HYDRATE_EVENTS */
+      , ["modelValue", "onEditorBlur"]), $data.userForm.errors.biography ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.userForm.errors.biography), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Solicitar reset de constraseña "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         "class": "mt-4",
-        onSubmit: _cache[12] || (_cache[12] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[10] || (_cache[10] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.resetPassword && $options.resetPassword.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "hidden",
         name: "email",
-        value: $data.formPwd.email
+        value: $data.changePwd.email
       }, null, 8
       /* PROPS */
-      , _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block btn", {
-          'opacity-25': $data.formPwd.processing
+          'opacity-25': $data.changePwd.processing
         }]),
-        disabled: $data.formPwd.processing
+        disabled: $data.changePwd.processing
       }, " Solicitar cambio de contraseña ", 10
       /* CLASS, PROPS */
-      , _hoisted_19)], 32
+      , _hoisted_25)], 32
       /* HYDRATE_EVENTS */
       )])];
     }),
