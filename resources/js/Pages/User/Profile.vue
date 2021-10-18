@@ -11,8 +11,9 @@
                 <div class="flex flex-row p-4 justify-start items-center ">
                     <div class="w-60">
                         <h3 class="font-logo font-semibold text-lg text-pink-dark">Imagen de usuario:</h3>
-                        <img class="rounded w-full border-2 border-pink-lighter my-auto" :src="user.avatar" alt="" ref="avatarPreview">
-                        <input type="file" class="mt-2" name="avatar" @input="userForm.avatar = $event.target.files[0]" v-on:change="submitUserData" ref="avatar">
+                        <img class="rounded w-full border-2 mb-2 border-pink-lighter my-auto" :src="user.avatar" alt="" ref="avatarPreview">
+                        <label class="btn cursor-pointer block text-center align-middle" for="avatar"> <i class="ri-upload-cloud-line"> </i> <span class=""> Subir Imagen </span> </label>
+                        <input id="avatar" type="file" class="mt-2 hidden" name="avatar" @input="userForm.avatar = $event.target.files[0]" v-on:change="submitUserData" ref="avatar">
 
                         <div v-if="userForm.errors.avatar"><p class="text-red-800">{{ userForm.errors.avatar}}</p></div>
                     </div>
@@ -54,20 +55,39 @@
                 </button>
             </form>
 
-        </div>
+            <div v-if="user.web_owner" class="mt-4">
+                <h2 class="font-logo font-semibold text-2xl text-pink-dark border-b-2 border-pink">Enlaces de Contacto</h2>
 
+                <table class="table-auto">
+                    <thead>
+                        <tr>
+                            <th>Icono</th>
+                            <th>Url</th>
+                            <th>Slug</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </main-layout>
 </template>
 <script>
 import MainLayout from '@/Layouts/MainLayout.vue';
 import Editor from '@/Components/RichEditor.vue';
 import ValidationErrors from '@/Components/ValidationErrors.vue';
+import EditForm from '@/Components/EditForm.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     components:{
         ValidationErrors,
         MainLayout,
+        EditForm,
         Editor,
         Head,
     },
