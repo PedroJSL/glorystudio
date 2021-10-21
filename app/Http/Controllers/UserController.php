@@ -128,45 +128,4 @@ class UserController extends Controller
         //
     }
 
-    /*
-    public function updateImage(Request $request)
-    {
-        //
-        $user = User::find($request->user_id);
-
-        if($request->hasFile('avatar'))
-        {
-            if($request->file('avatar')->isValid())
-            {
-                $imageName = time().'.'.$request->avatar->extension();
-                $path = '/images/user_'.$user->id . '/'. $imageName;
-                $request->avatar->move(public_path('images/user_'.$user->id), $imageName);
-                $user->avatar = $path;
-
-                if($user->save()){
-                    $request->session()->flash('message', 'Imagen modificada correctamente');
-                    $request->session()->flash('message_type', '0');
-                }
-                else
-                {
-                    $request->session()->flash('message', 'Error al modificar la imagen');
-                    $request->session()->flash('message_type', '2');
-                }
-            }
-            else
-            {
-                $request->session()->flash('message', 'Imagen no válida');
-                $request->session()->flash('message_type', '2');
-            }
-
-        }
-        else
-        {
-            $request->session()->flash('message', 'No se ha seleccionado ninguna imagen');
-            $request->session()->flash('message_type', '1');
-        }
-
-        return Redirect::route('user.profile', [$request->user_id]);
-    }
-    */
 }

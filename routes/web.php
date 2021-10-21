@@ -29,10 +29,14 @@ Route::get('/about-me', function(){
 
 //Rutas del apartado de portfolio
 Route::get('/portfolio', [ProjectController::class, 'showAllProjects']);
-Route::get('/portfolio/{project}', [ProjectController::class, 'getProjectBySlug']);
+Route::get('/portfolio/{project}', [ProjectController::class, 'getProjectBySlug'])->name('show_project');
 
 Route::get('/portfolio/project/new', [ProjectController::class, 'showNewProjectForm'])->middleware('auth');
+Route::get('/portfolio/project/edit/{slug}', [ProjectController::class, 'showEditProjectForm'])->middleware('auth');
 
+Route::post('/portfolio/project/new', [ProjectController::class, 'newProject'])->name('project.new')->middleware('auth');
+Route::post('/portfolio/project/update', [ProjectController::class, 'updateProject'])->middleware('auth');
+Route::post('/portfolio/project/delete', [ProjectController::class, 'deleteProject'])->middleware('auth');
 
 
 //Rutas del apartado de blog
