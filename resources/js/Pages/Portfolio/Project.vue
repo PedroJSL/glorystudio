@@ -13,11 +13,11 @@
 
             <div class="mt-4 p-4">
 
-                <p class="p-2 text-lg flex flex-col">
-                    {{project.description}}
+                <div class="p-2 text-lg flex flex-col">
+                    <div v-html="project.description"/>
 
                     <span class="font-logo text-sm text-pink-dark text-right">Proyecto realizado el: {{ formatDate(project.project_date) }}</span>
-                </p>
+                </div>
 
 
 

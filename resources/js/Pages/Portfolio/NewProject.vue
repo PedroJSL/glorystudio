@@ -35,7 +35,7 @@
 
                 <div class="mt-4">
                     <label for="selectImages" class="btn cursor-pointer text-center align-middle">Seleccionar imagenes</label>
-                    <input type="file" id="selectImages" name="selectImages" class="hidden" multiple accept="image" @change="previewImages">
+                    <input type="file" id="selectImages" name="selectImages" class="hidden" multiple @input="newProjectForm.images = $event.target.files" @change="previewImages">
                     <div v-if="newProjectForm.errors.images"><p class="text-red-800">{{ newProjectForm.errors.images}}</p></div>
                     <div class="flex flex-row overflow-x-auto border-t-2 border-pink-light mt-2 p-2">
                         <img v-for="(image, key) in selectedImages" :key="key" :src="image.src" class="w-1/4 mr-2 rounded">
@@ -107,7 +107,7 @@ export default {
         },
         submitNewProject()
         {
-            this.newProjectForm.images = this.selectedImages;
+            //this.newProjectForm.images = this.selectedImages;
             if(this.newProjectForm.category === '0')
             {
                 this.newProjectForm.category = this.$refs.newCategory.value;

@@ -10,6 +10,8 @@ use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\ProjectImages;
 
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
@@ -45,9 +47,9 @@ class ProjectController extends Controller
             'description' => 'required',
             'project_date' => 'required|date',
             'category' => 'required',
-            //'images' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
+            'images' => 'required',
+            'images.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
         ]));
-        Log::debug("Pasa validacion");
 
         $project = new Project();
 
@@ -55,9 +57,8 @@ class ProjectController extends Controller
         $project->name = $request->name;
         $project->slug = str_replace(" ", "_", trim(strtolower($request->name)));
         $project->description = $request->description;
-        $project->project_date = $request->project_date;
+        $project->project_date = Carbon::parse($request->project_date);
 
-        Log::debug("Crea nuevo Project inicializa variable");
         //Registrar la categoría si no existe
         if($request->category == 0)
         {
@@ -77,23 +78,18 @@ class ProjectController extends Controller
         else
         {
             $project->project_category_id = $request->category;
-            Log::debug("Categoria diferente de 0");
         }
 
-        Log::debug("Antes de guardar Proyecto");
         if($project->save())
         {
-            Log::debug("Guarda Proyecto");
             //Guardar las imágenes
             if($request->hasFile('images'))
             {
-                Log::debug("Hay imágenes");
-
                 $order = 0;
                 foreach($request->images as $image){
                     $projectImage = new ProjectImages();
 
-                    $imageName = time() . '.' . $image->extension();
+                    $imageName = time().'_'. $order . '.' . $image->extension();
                     $path = '/images/project_' . $project->id .'/' .$imageName;
                     $image->move(public_path('images/project_' . $project->id), $imageName);
 
@@ -107,7 +103,6 @@ class ProjectController extends Controller
                         $request->session()->flash('message_type', '2');
                         return Redirect::route('show_project',[$project->slug]);
                     }
-
                 }
 
                 $request->session()->flash('message', 'Se ha registrado el nuevo proyecto.');
