@@ -44,7 +44,7 @@ Route::post('/project_image/add', [ProjectImagesController::class, 'addImage'])-
 
 
 //Rutas del apartado de blog
-Route::get('/blog', [PostController::class, 'showAllPosts']);
+Route::get('/blog', [PostController::class, 'index']);
 
 /*
 Route::get('/shop', function(){
