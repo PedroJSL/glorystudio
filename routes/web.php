@@ -46,11 +46,10 @@ Route::get('/shop', function(){
 //Rutas para usuario registrado
 Route::get('/profile/{id}', [UserController::class, 'index'])->name('user.profile')->middleware('auth');
 
-//Route::post('/profile/updateImage', [UserController::class, 'updateImage'])->name('user.update.image')->middleware('auth');
 Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update')->middleware('auth');
 
 //Modificacion de los enlaces de contacto
-Route::post('/contact_link/delete', [ContactLinksController::class, 'delete'])->name('contact.delete')->middleware('auth');
-Route::post('/contact_link/update_icon', [ContactLinksController::class, 'updateIcon'])->name('contact.update_icon')->middleware('auth');
+Route::post('/contact_link/delete', [ContactLinksController::class, 'delete'])->name('contactlink.delete')->middleware('auth');
+Route::post('/contact_link/update', [ContactLinksController::class, 'update'])->name('contactlink.update')->middleware('auth');
 
 require __DIR__.'/auth.php';
