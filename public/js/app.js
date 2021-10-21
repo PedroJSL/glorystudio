@@ -29114,9 +29114,6 @@ __webpack_require__.r(__webpack_exports__);
     project: {},
     category: {}
   },
-  mounted: function mounted() {
-    console.log(this.project.images);
-  },
   data: function data() {
     return {};
   },
@@ -29784,7 +29781,7 @@ __webpack_require__.r(__webpack_exports__);
     submitNewProject: function submitNewProject() {
       //this.newProjectForm.images = this.selectedImages;
       if (this.newProjectForm.category === '0') {
-        this.newProjectForm.category = this.$refs.newCategory.value;
+        this.newProjectForm.newCategoryName = this.$refs.newCategory.value;
       }
 
       this.newProjectForm.post(this.route('project.new'));
@@ -29831,7 +29828,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     changeFilter: function changeFilter(category) {
-      console.log("changeFilter: " + category);
       this.selected = category;
     }
   }
@@ -29853,6 +29849,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/MainLayout.vue */ "./resources/js/Layouts/MainLayout.vue");
 /* harmony import */ var _Components_Carousel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Carousel.vue */ "./resources/js/Components/Carousel.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
 
 
 
@@ -29865,10 +29864,29 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     project: {}
   },
+  setup: function setup() {
+    var user = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
+      return (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage)().props.value.auth.user;
+    });
+    return {
+      user: user
+    };
+  },
+  data: function data() {
+    return {
+      deleteForm: this.$inertia.form({
+        project_id: this.project.id
+      })
+    };
+  },
   methods: {
     formatDate: function formatDate(dateString) {
       var date = new Date(dateString);
       return date.toLocaleDateString('es-ES');
+    },
+    editProject: function editProject() {},
+    deleteProject: function deleteProject() {
+      this.deleteForm.post(this.route('project.delete'));
     }
   }
 });
@@ -32444,14 +32462,17 @@ var _hoisted_1 = {
   "class": "container m-auto p-2 flex flex-col"
 };
 var _hoisted_2 = {
+  "class": "flex flex-row justify-between"
+};
+var _hoisted_3 = {
   "class": "flex flex-row justify-items-start"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "/portfolio"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
-  "class": "h-10 w-10 text-pink hover:text-pink-dark mr-10",
+  "class": "h-10 w-10 text-pink hover:text-pink-dark mr-3",
   fill: "none",
   viewBox: "0 0 24 24",
   stroke: "currentColor"
@@ -32464,17 +32485,37 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_4 = {
+var _hoisted_5 = {
   "class": "font-logo font-bold text-pink-dark text-xl"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
+  key: 0,
+  "class": "flex flex-row"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ri-pencil-line"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_8 = [_hoisted_7];
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ri-delete-bin-6-line"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_10 = [_hoisted_9];
+var _hoisted_11 = {
   "class": "mt-4 p-4"
 };
-var _hoisted_6 = {
+var _hoisted_12 = {
   "class": "p-2 text-lg flex flex-col"
 };
-var _hoisted_7 = ["innerHTML"];
-var _hoisted_8 = {
+var _hoisted_13 = ["innerHTML"];
+var _hoisted_14 = {
   "class": "font-logo text-sm text-pink-dark text-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -32490,13 +32531,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_main_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.project.name), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.project.name), 1
       /* TEXT */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      )]), $setup.user && $setup.user.web_owner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn mr-2 w-10 h-10 text-2xl",
+        onClick: _cache[0] || (_cache[0] = function () {
+          return $options.editProject && $options.editProject.apply($options, arguments);
+        })
+      }, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn w-10 h-10 text-2xl",
+        onClick: _cache[1] || (_cache[1] = function () {
+          return $options.deleteProject && $options.deleteProject.apply($options, arguments);
+        })
+      }, _hoisted_10)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
         innerHTML: $props.project.description
       }, null, 8
       /* PROPS */
-      , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, "Proyecto realizado el: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formatDate($props.project.project_date)), 1
+      , _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, "Proyecto realizado el: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formatDate($props.project.project_date)), 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Slider de imágenes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Carousel, {
         images: $props.project.images

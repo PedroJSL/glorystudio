@@ -110,7 +110,7 @@ export default {
             //this.newProjectForm.images = this.selectedImages;
             if(this.newProjectForm.category === '0')
             {
-                this.newProjectForm.category = this.$refs.newCategory.value;
+                this.newProjectForm.newCategoryName = this.$refs.newCategory.value;
             }
             this.newProjectForm.post(this.route('project.new'));
         }

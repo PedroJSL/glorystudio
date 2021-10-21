@@ -42,7 +42,6 @@ export default {
     },
     methods:{
         changeFilter(category){
-            console.log("changeFilter: "+category);
             this.selected = category;
         }
     },

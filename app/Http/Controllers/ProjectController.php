@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 use App\Models\Project;
@@ -64,8 +65,8 @@ class ProjectController extends Controller
         {
             $projectCategory = new ProjectCategory();
 
-            $projectCategory->name = $request->newCategory;
-            $projectCategory->slug = str_replace(" ", "_", trim(strtolower($request->newCategory)));
+            $projectCategory->name = $request->newCategoryName;
+            $projectCategory->slug = str_replace(" ", "_", trim(strtolower($request->newCategoryName)));
 
             if(!$projectCategory->save())
             {
@@ -73,7 +74,7 @@ class ProjectController extends Controller
                 $request->session()->flash('message_type', '2');
                 return Redirect::back();
             }
-            $project->project_category_id = ProjectCategory::where('name', $request->newCategory)->first()->id;
+            $project->project_category_id = ProjectCategory::where('name', $request->newCategoryName)->first()->id;
         }
         else
         {
@@ -101,13 +102,13 @@ class ProjectController extends Controller
                     {
                         $request->session()->flash('message', 'Error al guardar las imágenes.');
                         $request->session()->flash('message_type', '2');
-                        return Redirect::route('show_project',[$project->slug]);
+                        return Redirect::route('project.byslug',[$project->slug]);
                     }
                 }
 
                 $request->session()->flash('message', 'Se ha registrado el nuevo proyecto.');
                 $request->session()->flash('message_type', '0');
-                return Redirect::route('show_project',[$project->slug]);
+                return Redirect::route('project.byslug',[$project->slug]);
             }
         }
         else
@@ -117,5 +118,39 @@ class ProjectController extends Controller
             return Redirect::back();
         }
 
+    }
+
+    public function deleteProject(Request $request)
+    {
+        if($request->validate([
+            'project_id' => 'required',
+        ]));
+
+        $project = Project::findOrFail($request->project_id);
+
+        $category = $project->projectCategory;
+
+        foreach($project->images as $image)
+        {
+            Storage::delete($image->image_url);
+            $image->delete();
+        }
+
+        if($project->delete())
+        {
+            $request->session()->flash('message', 'Proyecto eliminado correctamente.');
+            $request->session()->flash('message_type', '0');
+
+            //Si no quedan mas proyectos en la categoría, eliminarla
+            if(count($category->projects) == 0)
+            {
+                $category->delete();
+            }
+
+            return Redirect::route('portfolio');
+        }
+        $request->session()->flash('message', 'Error al eliminar el proyecto.');
+        $request->session()->flash('message_type', '2');
+        return Redirect::back();
     }
 }

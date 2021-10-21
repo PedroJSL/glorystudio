@@ -20,9 +20,6 @@ export default {
         project: {},
         category: {}
     },
-    mounted(){
-        console.log(this.project.images);
-    },
     data(){
         return {
         }
