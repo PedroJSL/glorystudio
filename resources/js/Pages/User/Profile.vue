@@ -165,6 +165,10 @@ export default {
         {
             this.addNewContact = true;
         },
+        prevCL()
+        {
+
+        },
         submitNewCL()
         {
             if(this.submitNewCL.isDirty)
