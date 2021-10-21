@@ -56,15 +56,13 @@
             </form>
 
             <div v-if="user.web_owner" class="mt-4">
+
+                <!-- Gestionar enlaces de contacto -->
                 <div class="flex flex-row justify-between border-b-2 border-pink p-2">
                     <h2 class="font-logo font-semibold text-2xl text-pink-dark">Enlaces de Contacto</h2>
                     <button class="btn" v-on:click="showAddContactLinkForm">
                         Añadir Nuevo
                     </button>
-                </div>
-
-                <div>
-                    <link-form v-for="link in user.contact_links" :deleteUrl="'contactlink.delete'" :updateUrl="'contactlink.update'" :model="link" :key="link.id"/>
                 </div>
                 <div v-if="addNewContact">
                     <h2 class="font-logo text-md font-semibold text-pink-dark">Nuevo enlace de contacto: </h2>
@@ -73,30 +71,73 @@
                             <img class="rounded w-full" :src="newContactLinkForm.icon" alt="" ref="prevNewCL">
                             <label class="btn mt-2 cursor-pointer block text-center align-middle" for="icon_new_cl">Modificar</label>
                             <input id="icon_new_cl" type="file" name="icon_new_cl" class="mt-2 hidden" @input="newContactLinkForm.icon = $event.target.files[0]" v-on:change="prevCL" >
+                            <div v-if="newContactLinkForm.errors.icon"><p class="text-red-800">{{ newContactLinkForm.errors.icon}}</p></div>
                         </div>
 
                         <div class="flex flex-col w-full lg:w-10/12">
                             <div class="p-2 w-full">
                                 <label class = "form-label" for="url">Enlace de contacto</label>
-                                <input type="text" name="'url_new_cl" class="block w-full input" v-model.lazy="newContactLinkForm.url">
+                                <input type="text" name="'url_new_cl" class="block w-full input" v-model="newContactLinkForm.url">
+                                <div v-if="newContactLinkForm.errors.url"><p class="text-red-800">{{ newContactLinkForm.errors.url}}</p></div>
                             </div>
 
                             <div class="p-2 w-full">
                                 <label for="form-label" form="slug">Slug</label>
-                                <input type="text" name="'slug_new_cl" class="block w-full input" v-model.lazy="newContactLinkForm.slug" >
+                                <input type="text" name="'slug_new_cl" class="block w-full input" v-model="newContactLinkForm.slug" >
+                                <div v-if="newContactLinkForm.errors.slug"><p class="text-red-800">{{ newContactLinkForm.errors.slug}}</p></div>
                             </div>
                         </div>
-                    </form>
+                        <div class="flex flex-row justify-between p-2">
+                            <input type="submit" class="btn" value = "Guardar">
+                            <button class="btn" v-on:click="cancelNewCL">
+                                Cancelar
+                            </button>
+                        </div>
 
-                    <div class="flex flex-row justify-between p-2">
-                        <button class="btn" v-on:click="submitNewCL">
-                            Guardar
-                        </button>
-                        <button class="btn" v-on:click="cancelNewCL">
-                            Cancelar
-                        </button>
-                    </div>
+                    </form>
                 </div>
+                <div>
+                    <link-form v-for="link in user.contact_links" :type="'contact'" :deleteUrl="'contactlink.delete'" :updateUrl="'contactlink.update'" :model="link" :key="link.id"/>
+                </div>
+
+                <!-- Gestionar enlaces de redes sociales -->
+                <div class="flex flex-row justify-between border-b-2 border-pink p-2 mt-4">
+                    <h2 class="font-logo font-semibold text-2xl text-pink-dark">Enlaces de RRSS</h2>
+                    <button class="btn" v-on:click="showAddSocialMediaForm">
+                        Añadir Nuevo
+                    </button>
+                </div>
+                <div v-if="addNewSocial">
+                    <h2 class="font-logo text-md font-semibold text-pink-dark">Nuevo enlace de Red Social: </h2>
+                    <form class="flex flex-col xl:flex-row" @submit.prevent="submitNewSM">
+                        <div class="p-2 w-1/3 lg:w-1/12">
+                            <img class="rounded w-full" :src="newSocialMediaForm.icon" alt="" ref="prevNewSM">
+                            <label class="btn mt-2 cursor-pointer block text-center align-middle" for="icon_new_sm">Modificar</label>
+                            <input id="icon_new_sm" type="file" name="icon_new_sm" class="mt-2 hidden" @input="newSocialMediaForm.icon = $event.target.files[0]" v-on:change="prevSM" >
+                            <div v-if="newSocialMediaForm.errors.icon"><p class="text-red-800">{{ newSocialMediaForm.errors.icon}}</p></div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-10/12">
+                            <div class="p-2 w-full">
+                                <label class = "form-label" for="url">Enlace de red social</label>
+                                <input type="text" name="'url_new_sm" class="block w-full input" v-model="newSocialMediaForm.url">
+                                <div v-if="newSocialMediaForm.errors.url"><p class="text-red-800">{{ newSocialMediaForm.errors.url}}</p></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-row justify-between p-2">
+                            <input type="submit" class="btn" value = "Guardar">
+                            <button class="btn" v-on:click="cancelNewSM">
+                                Cancelar
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+                <div>
+                    <link-form v-for="link in user.social_medias" :type="'rrss'" :deleteUrl="'socialmedia.delete'" :updateUrl="'socialmedia.update'" :model="link" :key="link.id"/>
+                </div>
+
+
             </div>
         </div>
     </main-layout>
@@ -120,10 +161,6 @@ export default {
     {
         user: {},
     },
-    mounted()
-    {
-        console.log(this.user);
-    },
     data(){
         return {
             userForm: this.$inertia.form({
@@ -139,9 +176,16 @@ export default {
             }),
             addNewContact: false,
             newContactLinkForm: this.$inertia.form({
+                user_id: this.user.id,
                 icon: '/images/placeholder.png',
                 url: '',
                 slug: '',
+            }),
+            addNewSocial: false,
+            newSocialMediaForm: this.$inertia.form({
+                user_id: this.user.id,
+                icon: '/images/placeholder.png',
+                url: '',
             })
         }
     },
@@ -150,7 +194,6 @@ export default {
         {
             if(this.userForm.isDirty)
             {
-                //this.userForm.biography = this.user.biography;
                 this.userForm.post(this.route('user.update', this.user.id), {
                     preserveScroll: true,
                     onFinish: () => this.userForm.reset(),
@@ -161,15 +204,24 @@ export default {
         {
             this.changePwd.post(this.route('password.email'));
         },
+        //Funciones para la adición de un nuevo enlace de contacto
         showAddContactLinkForm()
         {
             this.addNewContact = true;
         },
+        prevCL()
+        {
+            this.$refs.prevNewCL.src = URL.createObjectURL(this.newContactLinkForm.icon);
+        },
         submitNewCL()
         {
-            if(this.submitNewCL.isDirty)
+            if(this.newContactLinkForm.isDirty)
             {
-
+                this.newContactLinkForm.post(this.route('contactlink.new'),{
+                    preserveScroll:true,
+                    onSuccess: () => this.addNewContact = false,
+                    onFinish: () => this.newContactLinkForm.reset(),
+                })
             }
         },
         cancelNewCL()
@@ -177,6 +229,32 @@ export default {
             this.newContactLinkForm.reset();
             this.addNewContact = false;
         },
+        //Funciones para la adición de un nuevo enlace de red social
+        showAddSocialMediaForm()
+        {
+            this.addNewSocial = true;
+        },
+        prevSM()
+        {
+            this.$refs.prevNewSM.src = URL.createObjectURL(this.newSocialMediaForm.icon);
+        },
+        submitNewSM()
+        {
+            if(this.newSocialMediaForm.isDirty)
+            {
+                this.newSocialMediaForm.post(this.route('socialmedia.new'),{
+                    preserveScroll:true,
+                    onSuccess: () => this.addNewSocial = false,
+                    onFinish: () => this.newSocialMediaForm.reset(),
+                })
+            }
+        },
+        cancelNewSM()
+        {
+            this.newSocialMediaForm.reset();
+            this.addNewSocial = false;
+        },
+
     }
 }
 </script>

@@ -6,6 +6,8 @@ use App\Models\ContactLinks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Support\Facades\Log;
+
 
 class ContactLinksController extends Controller
 {
@@ -30,7 +32,7 @@ class ContactLinksController extends Controller
         if($request->hasFile('icon'))
         {
             if($request->validate([
-                'icon' => 'icon|dimensions:min_width=200,min_height=200'
+                'icon' => 'image|dimensions:min_width=200,min_height=200'
             ]));
 
             if($request->file('icon')->isValid())
@@ -70,35 +72,32 @@ class ContactLinksController extends Controller
 
     public function new(Request $request)
     {
-        $contactLink = ContactLinks::find($request->id);
-        $userId = $contactLink->user_id;
+        $contactLink = new ContactLinks();
+        Log::debug("Crea nuevo objeto");
 
-        if($request->hasFile('icon'))
+        if($request->validate([
+            'icon' => 'required|image|dimensions:min_width=200,min_height=200',
+            'url' => 'required|max:255',
+            'slug' => 'required|max:255',
+            'user_id' => 'required|integer',
+        ]));
+        Log::debug("Valida campos del form");
+
+        if($request->file('icon')->isValid())
         {
-            if($request->validate([
-                'icon' => 'icon|dimensions:min_width=200,min_height=200'
-            ]));
+            $imageName = time().'.'.$request->icon->extension();
+            $path = '/images/contact/' . $imageName;
+            $request->icon->move( public_path('images/contact/') , $imageName );
+            $contactLink->icon = $path;
 
-            if($request->file('icon')->isValid())
-            {
-                $imageName = time().'.'.$request->icon->extension();
-                $path = '/images/contact/' . $imageName;
-                $request->icon->move( public_path('images/contact/') , $imageName );
-                $contactLink->icon = $path;
-
-            }
-        }
-        else
-        {
-            if($request->validate([
-                'url' => 'required|max:255',
-                'slug' => 'required|max:255'
-            ]));
-
-            $contactLink->url = $request->url;
-            $contactLink->slug = $request->slug;
+            Log::debug("Imagen copiada");
 
         }
+
+        $contactLink->url = $request->url;
+        $contactLink->slug = $request->slug;
+        $contactLink->user_id = $request->user_id;
+        Log::debug("Campos establecidos:: $contactLink");
 
 
         if($contactLink->save()){
@@ -111,7 +110,7 @@ class ContactLinksController extends Controller
             $request->session()->flash('message_type', '2');
         }
 
-        return Redirect::route('user.profile', [$userId]);
+        return Redirect::route('user.profile', [$request->user_id]);
     }
 }
 

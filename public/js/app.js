@@ -28983,6 +28983,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    type: "",
     model: {},
     updateUrl: "",
     deleteUrl: ""
@@ -29880,9 +29881,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     user: {}
   },
-  mounted: function mounted() {
-    console.log(this.user);
-  },
   data: function data() {
     return {
       userForm: this.$inertia.form({
@@ -29897,9 +29895,16 @@ __webpack_require__.r(__webpack_exports__);
       }),
       addNewContact: false,
       newContactLinkForm: this.$inertia.form({
+        user_id: this.user.id,
         icon: '/images/placeholder.png',
         url: '',
         slug: ''
+      }),
+      addNewSocial: false,
+      newSocialMediaForm: this.$inertia.form({
+        user_id: this.user.id,
+        icon: '/images/placeholder.png',
+        url: ''
       })
     };
   },
@@ -29908,7 +29913,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.userForm.isDirty) {
-        //this.userForm.biography = this.user.biography;
         this.userForm.post(this.route('user.update', this.user.id), {
           preserveScroll: true,
           onFinish: function onFinish() {
@@ -29920,15 +29924,57 @@ __webpack_require__.r(__webpack_exports__);
     resetPassword: function resetPassword() {
       this.changePwd.post(this.route('password.email'));
     },
+    //Funciones para la adición de un nuevo enlace de contacto
     showAddContactLinkForm: function showAddContactLinkForm() {
       this.addNewContact = true;
     },
+    prevCL: function prevCL() {
+      this.$refs.prevNewCL.src = URL.createObjectURL(this.newContactLinkForm.icon);
+    },
     submitNewCL: function submitNewCL() {
-      if (this.submitNewCL.isDirty) {}
+      var _this2 = this;
+
+      if (this.newContactLinkForm.isDirty) {
+        this.newContactLinkForm.post(this.route('contactlink.new'), {
+          preserveScroll: true,
+          onSuccess: function onSuccess() {
+            return _this2.addNewContact = false;
+          },
+          onFinish: function onFinish() {
+            return _this2.newContactLinkForm.reset();
+          }
+        });
+      }
     },
     cancelNewCL: function cancelNewCL() {
       this.newContactLinkForm.reset();
       this.addNewContact = false;
+    },
+    //Funciones para la adición de un nuevo enlace de red social
+    showAddSocialMediaForm: function showAddSocialMediaForm() {
+      this.addNewSocial = true;
+    },
+    prevSM: function prevSM() {
+      this.$refs.prevNewSM.src = URL.createObjectURL(this.newSocialMediaForm.icon);
+    },
+    submitNewSM: function submitNewSM() {
+      var _this3 = this;
+
+      if (this.newSocialMediaForm.isDirty) {
+        this.newSocialMediaForm.post(this.route('socialmedia.new'), {
+          preserveScroll: true,
+          onSuccess: function onSuccess() {
+            return _this3.addNewSocial = false;
+          },
+          onFinish: function onFinish() {
+            return _this3.newSocialMediaForm.reset();
+          }
+        });
+      }
+    },
+    cancelNewSM: function cancelNewSM() {
+      this.newSocialMediaForm.reset();
+      this.addNewSocial = false;
     }
   }
 });
@@ -30347,6 +30393,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_9 = ["name"];
 var _hoisted_10 = {
+  key: 0,
   "class": "p-2 w-full"
 };
 
@@ -30378,11 +30425,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": "btn mt-2 cursor-pointer block text-center align-middle",
-    "for": 'icon_' + $props.model.id
+    "for": $props.type + 'icon_' + $props.model.id
   }, "Modificar", 8
   /* PROPS */
   , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    id: 'icon_' + $props.model.id,
+    id: $props.type + 'icon_' + $props.model.id,
     type: "file",
     name: 'icon_' + $props.model.id,
     "class": "mt-2 hidden",
@@ -30396,7 +30443,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    name: 'url_' + $props.model.id,
+    name: $props.type + 'url_' + $props.model.id,
     "class": "block w-full input",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.updateForm.url = $event;
@@ -30408,9 +30455,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_9), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateForm.url, void 0, {
     lazy: true
-  }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }]])]), $props.type === 'contact' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    name: 'slug_' + $props.model.idd,
+    name: $props.type + 'slug_' + $props.model.idd,
     "class": "block w-full input",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.updateForm.slug = $event;
@@ -30422,7 +30469,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateForm.slug, void 0, {
     lazy: true
-  }]])])])], 32
+  }]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 32
   /* HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn w-full",
@@ -32364,33 +32411,130 @@ var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_35 = {
-  "class": "flex flex-col w-full lg:w-10/12"
+  key: 0
 };
 var _hoisted_36 = {
+  "class": "text-red-800"
+};
+var _hoisted_37 = {
+  "class": "flex flex-col w-full lg:w-10/12"
+};
+var _hoisted_38 = {
   "class": "p-2 w-full"
 };
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "form-label",
   "for": "url"
 }, "Enlace de contacto", -1
 /* HOISTED */
 );
 
-var _hoisted_38 = {
+var _hoisted_40 = {
+  key: 0
+};
+var _hoisted_41 = {
+  "class": "text-red-800"
+};
+var _hoisted_42 = {
   "class": "p-2 w-full"
 };
 
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "form-label",
   form: "slug"
 }, "Slug", -1
 /* HOISTED */
 );
 
-var _hoisted_40 = {
+var _hoisted_44 = {
+  key: 0
+};
+var _hoisted_45 = {
+  "class": "text-red-800"
+};
+var _hoisted_46 = {
   "class": "flex flex-row justify-between p-2"
 };
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "submit",
+  "class": "btn",
+  value: "Guardar"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_48 = {
+  "class": "flex flex-row justify-between border-b-2 border-pink p-2 mt-4"
+};
+
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+  "class": "font-logo font-semibold text-2xl text-pink-dark"
+}, "Enlaces de RRSS", -1
+/* HOISTED */
+);
+
+var _hoisted_50 = {
+  key: 1
+};
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+  "class": "font-logo text-md font-semibold text-pink-dark"
+}, "Nuevo enlace de Red Social: ", -1
+/* HOISTED */
+);
+
+var _hoisted_52 = {
+  "class": "p-2 w-1/3 lg:w-1/12"
+};
+var _hoisted_53 = ["src"];
+
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "btn mt-2 cursor-pointer block text-center align-middle",
+  "for": "icon_new_sm"
+}, "Modificar", -1
+/* HOISTED */
+);
+
+var _hoisted_55 = {
+  key: 0
+};
+var _hoisted_56 = {
+  "class": "text-red-800"
+};
+var _hoisted_57 = {
+  "class": "flex flex-col w-full lg:w-10/12"
+};
+var _hoisted_58 = {
+  "class": "p-2 w-full"
+};
+
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "form-label",
+  "for": "url"
+}, "Enlace de red social", -1
+/* HOISTED */
+);
+
+var _hoisted_60 = {
+  key: 0
+};
+var _hoisted_61 = {
+  "class": "text-red-800"
+};
+var _hoisted_62 = {
+  "class": "flex flex-row justify-between p-2"
+};
+
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "submit",
+  "class": "btn",
+  value: "Guardar"
+}, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -32514,25 +32658,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS, PROPS */
       , _hoisted_26)], 32
       /* HYDRATE_EVENTS */
-      ), $props.user.web_owner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      ), $props.user.web_owner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Gestionar enlaces de contacto "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn",
         onClick: _cache[11] || (_cache[11] = function () {
           return $options.showAddContactLinkForm && $options.showAddContactLinkForm.apply($options, arguments);
         })
-      }, " Añadir Nuevo ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.user.contact_links, function (link) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_link_form, {
-          deleteUrl: 'contactlink.delete',
-          updateUrl: 'contactlink.update',
-          model: link,
-          key: link.id
-        }, null, 8
-        /* PROPS */
-        , ["deleteUrl", "updateUrl", "model"]);
-      }), 128
-      /* KEYED_FRAGMENT */
-      ))]), $data.addNewContact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+      }, " Añadir Nuevo ")]), $data.addNewContact ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         "class": "flex flex-col xl:flex-row",
-        onSubmit: _cache[16] || (_cache[16] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[17] || (_cache[17] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submitNewCL && $options.submitNewCL.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -32551,11 +32684,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $data.newContactLinkForm.icon = $event.target.files[0];
         }),
         onChange: _cache[13] || (_cache[13] = function () {
-          return _ctx.prevCL && _ctx.prevCL.apply(_ctx, arguments);
+          return $options.prevCL && $options.prevCL.apply($options, arguments);
         })
       }, null, 32
       /* HYDRATE_EVENTS */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      ), $data.newContactLinkForm.errors.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.newContactLinkForm.errors.icon), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         name: "'url_new_cl",
         "class": "block w-full input",
@@ -32564,9 +32699,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newContactLinkForm.url, void 0, {
-        lazy: true
-      }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newContactLinkForm.url]]), $data.newContactLinkForm.errors.url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.newContactLinkForm.errors.url), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         name: "'slug_new_cl",
         "class": "block w-full input",
@@ -32575,21 +32710,90 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newContactLinkForm.slug, void 0, {
-        lazy: true
-      }]])])])], 32
-      /* HYDRATE_EVENTS */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newContactLinkForm.slug]]), $data.newContactLinkForm.errors.slug ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.newContactLinkForm.errors.slug), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [_hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "btn",
-        onClick: _cache[17] || (_cache[17] = function () {
-          return $options.submitNewCL && $options.submitNewCL.apply($options, arguments);
-        })
-      }, " Guardar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        "class": "btn",
-        onClick: _cache[18] || (_cache[18] = function () {
+        onClick: _cache[16] || (_cache[16] = function () {
           return $options.cancelNewCL && $options.cancelNewCL.apply($options, arguments);
         })
-      }, " Cancelar ")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      }, " Cancelar ")])], 32
+      /* HYDRATE_EVENTS */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.user.contact_links, function (link) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_link_form, {
+          type: 'contact',
+          deleteUrl: 'contactlink.delete',
+          updateUrl: 'contactlink.update',
+          model: link,
+          key: link.id
+        }, null, 8
+        /* PROPS */
+        , ["deleteUrl", "updateUrl", "model"]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Gestionar enlaces de redes sociales "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [_hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn",
+        onClick: _cache[18] || (_cache[18] = function () {
+          return $options.showAddSocialMediaForm && $options.showAddSocialMediaForm.apply($options, arguments);
+        })
+      }, " Añadir Nuevo ")]), $data.addNewSocial ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_50, [_hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        "class": "flex flex-col xl:flex-row",
+        onSubmit: _cache[23] || (_cache[23] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $options.submitNewSM && $options.submitNewSM.apply($options, arguments);
+        }, ["prevent"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+        "class": "rounded w-full",
+        src: $data.newSocialMediaForm.icon,
+        alt: "",
+        ref: "prevNewSM"
+      }, null, 8
+      /* PROPS */
+      , _hoisted_53), _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        id: "icon_new_sm",
+        type: "file",
+        name: "icon_new_sm",
+        "class": "mt-2 hidden",
+        onInput: _cache[19] || (_cache[19] = function ($event) {
+          return $data.newSocialMediaForm.icon = $event.target.files[0];
+        }),
+        onChange: _cache[20] || (_cache[20] = function () {
+          return $options.prevSM && $options.prevSM.apply($options, arguments);
+        })
+      }, null, 32
+      /* HYDRATE_EVENTS */
+      ), $data.newSocialMediaForm.errors.icon ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.newSocialMediaForm.errors.icon), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [_hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "text",
+        name: "'url_new_sm",
+        "class": "block w-full input",
+        "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
+          return $data.newSocialMediaForm.url = $event;
+        })
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newSocialMediaForm.url]]), $data.newSocialMediaForm.errors.url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.newSocialMediaForm.errors.url), 1
+      /* TEXT */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn",
+        onClick: _cache[22] || (_cache[22] = function () {
+          return $options.cancelNewSM && $options.cancelNewSM.apply($options, arguments);
+        })
+      }, " Cancelar ")])], 32
+      /* HYDRATE_EVENTS */
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.user.social_medias, function (link) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_link_form, {
+          type: 'rrss',
+          deleteUrl: 'socialmedia.delete',
+          updateUrl: 'socialmedia.update',
+          model: link,
+          key: link.id
+        }, null, 8
+        /* PROPS */
+        , ["deleteUrl", "updateUrl", "model"]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
     }),
     _: 1
     /* STABLE */
@@ -75694,7 +75898,7 @@ function keyName(event) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.4","/Users/pedrojsl/Documents/Desarrollo/Web/glorystudio"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"/Users/pedrojsl/Documents/Desarrollo/Web/glorystudio","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"E:\\\\Desarrollo\\\\Laravel\\\\glorystudio","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 
