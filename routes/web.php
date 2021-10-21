@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactLinksController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProjectImagesController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,11 +33,14 @@ Route::get('/portfolio', [ProjectController::class, 'showAllProjects'])->name('p
 Route::get('/portfolio/{project}', [ProjectController::class, 'getProjectBySlug'])->name('project.byslug');
 
 Route::get('/portfolio/project/new', [ProjectController::class, 'showNewProjectForm'])->middleware('auth');
-Route::get('/portfolio/project/edit/{slug}', [ProjectController::class, 'showEditProjectForm'])->middleware('auth');
+Route::get('/portfolio/project/edit/{id}', [ProjectController::class, 'showEditProjectForm'])->name('project.showEditForm')->middleware('auth');
 
 Route::post('/portfolio/project/new', [ProjectController::class, 'newProject'])->name('project.new')->middleware('auth');
 Route::post('/portfolio/project/update', [ProjectController::class, 'updateProject'])->name('project.update')->middleware('auth');
 Route::post('/portfolio/project/delete', [ProjectController::class, 'deleteProject'])->name('project.delete')->middleware('auth');
+
+Route::post('/project_image/delete', [ProjectImagesController::class, 'deleteImage'])->name('project_image.delete')->middleware('auth');
+Route::post('/project_image/add', [ProjectImagesController::class, 'addImage'])->name('project_image.add')->middleware('auth');
 
 
 //Rutas del apartado de blog

@@ -34,6 +34,12 @@ class ProjectController extends Controller
         return Inertia::render('Portfolio/Project', ['project' => $project, 'images' =>$images]);
     }
 
+    public function showEditProjectForm($id)
+    {
+        $project = Project::findOrFail($id);
+        return Inertia::render('Portfolio/EditProject', ['project' => $project->load('images'), 'categories' => ProjectCategory::all() ]);
+    }
+
     public function showNewProjectForm()
     {
         return Inertia::render('Portfolio/NewProject', ['categories' => ProjectCategory::all()]);
@@ -41,15 +47,13 @@ class ProjectController extends Controller
 
     public function newProject(Request $request)
     {
-        Log::debug("Inicio de funcion newProject");
-
         if($request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
             'project_date' => 'required|date',
             'category' => 'required',
             'images' => 'required',
-            'images.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
+            'images.*' => 'mimes:jpeg,jpg,png,gif|max:2048'
         ]));
 
         $project = new Project();
@@ -117,7 +121,6 @@ class ProjectController extends Controller
             $request->session()->flash('message_type', '2');
             return Redirect::back();
         }
-
     }
 
     public function deleteProject(Request $request)
@@ -153,4 +156,58 @@ class ProjectController extends Controller
         $request->session()->flash('message_type', '2');
         return Redirect::back();
     }
+
+    public function updateProject(Request $request)
+    {
+        if($request->validate([
+            'project_id' => 'required',
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'project_date' => 'required|date',
+            'category' => 'required',
+        ]));
+
+        $project = Project::find($request->project_id);
+
+        $project->name = $request->name;
+        $project->slug = str_replace(" ", "_", trim(strtolower($request->name)));
+        $project->description = $request->description;
+        $project->project_date = Carbon::parse($request->project_date);
+
+        //Registrar la categoría si no existe
+        if($request->category == 0)
+        {
+            $projectCategory = new ProjectCategory();
+
+            $projectCategory->name = $request->newCategoryName;
+            $projectCategory->slug = str_replace(" ", "_", trim(strtolower($request->newCategoryName)));
+
+            if(!$projectCategory->save())
+            {
+                $request->session()->flash('message', 'Error al generar la nueva categoria');
+                $request->session()->flash('message_type', '2');
+                return Redirect::back();
+            }
+            $project->project_category_id = ProjectCategory::where('name', $request->newCategoryName)->first()->id;
+        }
+        else
+        {
+            $project->project_category_id = $request->category;
+        }
+
+        if($project->save())
+        {
+
+            $request->session()->flash('message', 'Datos de proyecto actualizado correctamente');
+            $request->session()->flash('message_type', '0');
+            return Redirect::route('project.showEditForm',[$project->id]);
+        }
+        else
+        {
+            $request->session()->flash('message', 'Se ha producido un error al modificar el proyecto.');
+            $request->session()->flash('message_type', '2');
+            return Redirect::back();
+        }
+    }
+
 }

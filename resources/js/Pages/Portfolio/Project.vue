@@ -12,9 +12,9 @@
                 <h2 class="font-logo font-bold text-pink-dark  text-xl">{{project.name}}</h2>
                 </div>
                 <div v-if="user && user.web_owner" class="flex flex-row">
-                    <button class="btn mr-2 w-10 h-10 text-2xl" v-on:click="editProject">
+                    <a :href="'/portfolio/project/edit/'+project.id" class="btn mr-2 w-10 h-10 text-2xl">
                         <i class="ri-pencil-line"></i>
-                    </button>
+                    </a>
                     <button class="btn w-10 h-10 text-2xl" v-on:click="deleteProject">
                         <i class="ri-delete-bin-6-line"></i>
                     </button>
@@ -69,10 +69,6 @@ export default {
         {
             var date = new Date(dateString);
             return date.toLocaleDateString('es-ES');
-        },
-        editProject()
-        {
-
         },
         deleteProject()
         {
