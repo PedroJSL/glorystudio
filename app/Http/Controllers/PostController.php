@@ -19,6 +19,18 @@ class PostController extends Controller
         return Inertia::render('Blog/Blog', ['posts' => $posts, 'categories' => PostCategory::all()]);
     }
 
+    public function getPostByCategory($slug){
+        $category = PostCategory::where('slug', $slug)->firstOrFail();
 
+        $posts = Post::where('publication_date', '<=', Carbon::now())->where('post_category_id', $category->id)->orderBy('publication_date', 'desc')->paginate(6);
+        return Inertia::render('Blog/Blog', ['posts'=> $posts, 'categories' => PostCategory::all()]);
+    }
+
+    public function getPostBySlug($slug, $postSlug){
+        $category = PostCategory::where('slug', $slug)->firstOrFail();
+
+        $post = Post::where('slug', $postSlug)->where('post_category_id', $category->id)->orderBy('publication_date', 'desc')->first();
+        return Inertia::render('Blog/Post', ['post'=> $post->load('postCategory')]);
+    }
 
 }

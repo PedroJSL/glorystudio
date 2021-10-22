@@ -982,6 +982,14 @@ select{
   color: rgba(120, 53, 15, var(--tw-text-opacity));
 }
 
+.pagination-active
+{
+  --tw-bg-opacity: 1;
+  background-color: rgba(161, 19, 85, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
 .sr-only{
   position: absolute;
   width: 1px;

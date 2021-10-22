@@ -21,7 +21,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Index');
+    return Inertia::render('AboutMe');
 });
 
 Route::get('/about-me', function(){
@@ -45,6 +45,8 @@ Route::post('/project_image/add', [ProjectImagesController::class, 'addImage'])-
 
 //Rutas del apartado de blog
 Route::get('/blog', [PostController::class, 'index']);
+Route::get('/blog/{slug}', [PostController::class, 'getPostByCategory']);
+Route::get('/blog/{slug}/{post_slug}', [PostController::class, 'getPostBySlug']);
 
 /*
 Route::get('/shop', function(){
