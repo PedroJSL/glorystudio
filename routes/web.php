@@ -42,12 +42,15 @@ Route::post('/portfolio/project/delete', [ProjectController::class, 'deleteProje
 Route::post('/project_image/delete', [ProjectImagesController::class, 'deleteImage'])->name('project_image.delete')->middleware('auth');
 Route::post('/project_image/add', [ProjectImagesController::class, 'addImage'])->name('project_image.add')->middleware('auth');
 
+Route::get('/blog/post/new', [PostController::class, 'showNewPostForm']);
 
 //Rutas del apartado de blog
-Route::get('/blog', [PostController::class, 'index']);
+Route::get('/blog', [PostController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [PostController::class, 'getPostByCategory']);
-Route::get('/blog/{slug}/{post_slug}', [PostController::class, 'getPostBySlug']);
+Route::get('/blog/{slug}/{post_slug}', [PostController::class, 'getPostBySlug'])->name('post.byslug');
 
+Route::post('/blog_post/new', [PostController::class, 'newPost'])->name('post.new')->middleware('auth');
+Route::post('/blog_post/delete', [PostController::class, 'deletePost'])->name('post.delete')->middleware('auth');
 /*
 Route::get('/shop', function(){
     return Inertia::render('Shop');

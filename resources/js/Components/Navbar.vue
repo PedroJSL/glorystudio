@@ -106,6 +106,7 @@
             </li>
             <li v-if="user.web_owner">
                 <a class="block nav-link mr-4 p-2 shadow-sm" href="/portfolio/project/new"> Añadir Proyecto </a>
+                <a class="block nav-link mr-4 p-2 shadow-sm" href="/blog/post/new"> Añadir Post </a>
             </li>
 
         </ul>

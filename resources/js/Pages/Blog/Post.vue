@@ -57,7 +57,7 @@ export default {
     data(){
         return {
             deleteForm: this.$inertia.form({
-                post: this.post.id,
+                post_id: this.post.id,
             })
         }
     },

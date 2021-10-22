@@ -5,7 +5,8 @@
 
         <h3 class="font-logo text-pink-dark text-xl">{{post.name}}</h3>
         <div class="flex flex-row justify-center">
-            <p class="text-md">{{post.excerpt}}</p>
+        <div class="text-md" v-html="post.excerpt"/>
+
         </div>
         <p class="text-right text-pink text-sm mt-1">Fecha: {{formatDate(post.publication_date)}}</p>
     </a>
