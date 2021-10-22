@@ -145,4 +145,65 @@ class PostController extends Controller
         }
     }
 
+    public function updatePost(Request $request)
+    {
+        if($request->validate([
+            'post_id' => 'required'
+        ]));
+
+        $post = Post::find($request->post_id);
+
+        $post->name = $request->name;
+        $post->slug = str_replace(" ", "_", trim(strtolower($request->name)));
+        $post->excerpt = $request->excerpt;
+        $post->content = $request->content;
+        $post->publication_date = Carbon::parse($request->publication_date);
+
+        //Registrar la categoría si no existe
+        if($request->category == 0)
+        {
+            $postCategory = new PostCategory();
+
+            $postCategory->name = $request->newCategoryName;
+            $postCategory->slug = str_replace(" ", "_", trim(strtolower($request->newCategoryName)));
+
+            if(!$postCategory->save())
+            {
+                $request->session()->flash('message', 'Error al generar la nueva categoria');
+                $request->session()->flash('message_type', '2');
+                return Redirect::back();
+            }
+            $post->post_category_id = PostCategory::where('name', $request->newCategoryName)->first()->id;
+        }
+        else
+        {
+            $post->post_category_id = $request->category;
+        }
+
+        //Guardar las imágenes
+        if($request->hasFile('image'))
+        {
+            $imageName = time(). '.' . $request->image->extension();
+            $path = '/images/post_' . $post->id .'/' .$imageName;
+            $request->image->move(public_path('images/post_' . $post->id), $imageName);
+
+            $post->image = $path;
+        }
+
+        if($post->save())
+        {
+
+                $request->session()->flash('message', 'Se ha actualizado el post correctamente.');
+                $request->session()->flash('message_type', '0');
+                return Redirect::route('post.showUpdateForm',[$post->id]);
+            }
+        else
+        {
+            $request->session()->flash('message', 'Se ha producido un error al actualizar el post.');
+            $request->session()->flash('message_type', '2');
+            return Redirect::back();
+        }
+
+    }
+
 }
