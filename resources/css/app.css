@@ -1,27 +1,84 @@
-/*
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.nav-link-active{
-    @apply py-2 px-2 text-turquoise border-b-2 border-turquoise font-bold;
-}
-
-
-@import 'tailwindcss/utilities';
-*/
 @tailwind base;
 @tailwind components;
 
-.btn{
-    @apply py-1 px-1 font-medium text-white bg-pink-dark rounded hover:bg-pink transition duration-300;
-}
-
 .nav-link{
-    @apply py-2 px-2 text-pink-light font-semibold hover:text-turquoise transition duration-300;
+    @apply text-pink mx-2 hover:text-pink-dark font-logo font-semibold;
 }
-.nav-link-active{
-    @apply py-2 px-2 text-turquoise border-b-2 border-turquoise font-bold;
+.active
+{
+    @apply text-aqua-dark;
 }
 
+.btn{
+    @apply text-sm p-1 rounded-md bg-white text-pink-dark border-2 border-pink-dark hover:text-white hover:border-aqua-dark hover:bg-aqua font-logo font-semibold;
+}
+
+.link{
+    @apply text-sm p-1 rounded-md text-pink-dark hover:text-aqua-dark font-logo font-semibold;
+}
+
+.input{
+    @apply focus:border-aqua-dark focus:ring focus:ring-aqua focus:ring-opacity-50 rounded-md shadow-sm;
+}
+
+.form-label{
+    @apply block font-medium text-base;
+}
+
+.btn-toolbox{
+    @apply h-5 w-5 text-pink-dark mx-1;
+}
+.btn-toolbox:hover
+{
+    @apply text-aqua-dark;
+}
+.btn-toolbox:disabled{
+    @apply text-pink-lighter cursor-default;
+}
+
+.vertical-separator{
+    @apply border-r border-pink-lighter mx-1;
+}
+
+.info{
+    @apply bg-sky-200 border-2 border-sky-800 rounded-lg text-sky-900;
+}
+
+.success{
+    @apply bg-green-200 border-2 border-green-800 rounded-lg text-green-900;
+}
+
+.error{
+    @apply bg-red-200 border-2 border-red-800 rounded-lg text-red-900;
+}
+
+.warning {
+    @apply bg-amber-200 border-2 border-amber-800 rounded-lg text-amber-900;
+}
+
+.pagination-active
+{
+    @apply bg-pink-dark text-white;
+}
 
 @tailwind utilities;
+
+
+@layer utilities {
+    @variants responsive {
+        .text-shadow {
+          text-shadow: 2px 2px 4px #00ccc5;
+        }
+        .text-shadow-md {
+          text-shadow: 4px 4px 8px black;
+        }
+        .text-shadow-lg {
+          text-shadow: 15px 15px 30px black;
+        }
+        .text-shadow-none {
+          text-shadow: none;
+        }
+    }
+}

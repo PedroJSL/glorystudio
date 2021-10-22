@@ -24,7 +24,6 @@ class ProjectFactory extends Factory
         return [
             'name' => $this->faker->sentence(),
             'slug' => $this->faker->slug(),
-            'image' => 'https://loremflickr.com/500/500',
             'description' => $this->faker->paragraph(),
             'project_date' => $this->faker->date(),
             'user_id' => 1,

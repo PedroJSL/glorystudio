@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49a866d8f2344ef6a20b0d5ada898c11",
+    "content-hash": "030855df0dc91f3b6e01348a7653cb15",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2380,6 +2380,52 @@
                 "source": "https://github.com/laracasts/flash/tree/master"
             },
             "time": "2020-09-07T13:25:35+00:00"
+        },
+        {
+            "name": "laravel-lang/lang",
+            "version": "7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravel-Lang/lang.git",
+                "reference": "2a664c10dbc77b48583825dc0b76850a67842763"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/2a664c10dbc77b48583825dc0b76850a67842763",
+                "reference": "2a664c10dbc77b48583825dc0b76850a67842763",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "suggest": {
+                "andrey-helldar/laravel-lang-publisher": "Easy installation and update of translation files for your project",
+                "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+                "overtrue/laravel-lang": "Command to add languages in your project"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "caouecs",
+                    "email": "caouecs@caouecs.net"
+                }
+            ],
+            "description": "Languages for Laravel",
+            "keywords": [
+                "lang",
+                "languages",
+                "laravel",
+                "lpm"
+            ],
+            "support": {
+                "issues": "https://github.com/Laravel-Lang/lang/issues",
+                "source": "https://github.com/Laravel-Lang/lang/tree/7.0.0"
+            },
+            "time": "2020-07-13T18:58:06+00:00"
         },
         {
             "name": "laravel/framework",

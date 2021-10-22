@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('biography')->nullable();
             $table->boolean('web_owner')->default(false);
+            $table->string('avatar')->nullable();
+            $table->boolean('allowMails')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

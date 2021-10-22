@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,6 +37,14 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'flash' =>[
+                'type' => fn() => $request->session()->get('message_type'),
+                'message' => fn() => $request->session()->get('message')
+            ],
+            'owner' => [
+                'contact' => (User::where('web_owner', 1)->first())->contactLinks,
+                'rrss' => (User::where('web_owner', 1)->first())->socialMedias,
             ],
         ]);
     }

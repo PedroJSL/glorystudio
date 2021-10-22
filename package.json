@@ -19,10 +19,23 @@
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "node-sass": "^6.0.1",
         "postcss": "^8.2.13",
         "postcss-import": "^14.0.1",
+        "sass-loader": "^12.2.0",
         "tailwindcss": "^2.1.2",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "dependencies": {
+        "@tiptap/extension-list-item": "^2.0.0-beta.14",
+        "@tiptap/extension-text-align": "^2.0.0-beta.23",
+        "@tiptap/extension-underline": "^2.0.0-beta.16",
+        "@tiptap/starter-kit": "^2.0.0-beta.122",
+        "@tiptap/vue-3": "^2.0.0-beta.68",
+        "@vueuse/core": "^6.4.1",
+        "click-outside-vue3": "^4.0.1",
+        "remixicon": "^2.5.0",
+        "vue3-datepicker": "^0.2.5"
     }
 }

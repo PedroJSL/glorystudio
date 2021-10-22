@@ -36,6 +36,8 @@ La web constará de las siguientes secciones:
 - [Tailwindcss v2.2.7](https://tailwindcss.com/docs): Como Framework CSS.
 - [Vue.js](https://vuejs.org/v2/guide/): Como Framework de JavasScrip para Front-End
 - [Vanilo v2.1](https://vanilo.io/docs/2.x/what-is-vanilo): Como Framework de eCommerce para Laravel.
+- [Tiptap v2.0](https://tiptap.dev/): Librería para la edición de texto enriquecido.
+- [Vue 3 Datepicker](https://icehaunter.github.io/vue3-datepicker/): Librería para el selector de fecha
 
 
 ## Modelo de Datos

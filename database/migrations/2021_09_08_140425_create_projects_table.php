@@ -17,7 +17,6 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('image')->nullable();
             $table->text('description');
             $table->date('project_date')->nullable();
             $table->foreignId('user_id')->constrained();

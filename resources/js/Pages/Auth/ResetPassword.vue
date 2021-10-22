@@ -1,48 +1,42 @@
 <template>
     <Head title="Reset Password" />
 
-    <BreezeValidationErrors class="mb-4" />
+    <ValidationErrors class="mb-4" />
 
     <form @submit.prevent="submit">
         <div>
-            <BreezeLabel for="email" value="Email" />
-            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+            <label class = "form-label" for="email" > Correo electrónico </label>
+            <input id="email" type="email" class="mt-1 block w-full input" v-model="form.email" required autofocus autocomplete="username" />
         </div>
 
         <div class="mt-4">
-            <BreezeLabel for="password" value="Password" />
-            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+            <label class="form-label" for="password" > Contraseña </label>
+            <input id="password" type="password" class="mt-1 block w-full btn" v-model="form.password" required autocomplete="new-password" />
         </div>
 
         <div class="mt-4">
-            <BreezeLabel for="password_confirmation" value="Confirm Password" />
-            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            <label for="password_confirmation"> Confirmar Contraseña </label>
+            <input id="password_confirmation" type="password" class="mt-1 block w-full btn" v-model="form.password_confirmation" required autocomplete="new-password" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Reset Password
-            </BreezeButton>
+            <button class = "btn block" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Restablecer Contraseña
+            </button>
         </div>
     </form>
 </template>
 
 <script>
-import BreezeButton from '@/Components/Button.vue'
-import BreezeGuestLayout from '@/Layouts/Guest.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import AuthLayout from '@/Layouts/AuthBaseLayout.vue'
+import ValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
-    layout: BreezeGuestLayout,
+    layout: AuthLayout,
 
     components: {
-        BreezeButton,
-        BreezeInput,
-        BreezeLabel,
-        BreezeValidationErrors,
+        ValidationErrors,
         Head,
     },
 

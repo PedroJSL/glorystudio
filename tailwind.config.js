@@ -1,4 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+const { blue } = require('tailwindcss/colors');
 
 module.exports = {
     purge: [
@@ -9,33 +11,41 @@ module.exports = {
     ],
 
     theme: {
-        colors:{
-            pink: {
-                lighter: '#eab3d1',
-                light: '#e483b4',
-                DEFAULT: '#dd5a9c',
-                dark: '#a11355'
+        colors: {
+            green: colors.green,
+            blue: colors.blue,
+            sky: colors.sky,
+            red: colors.red,
+            amber: colors.amber,
+            black: colors.black,
+            white: colors.white,
+            pink:{
+                lighter: '#ebd1e1',
+                light: '#EAB3D1',
+                DEFAULT: '#E483B4',
+                dark: '#A11355',
             },
-            turquoise:{
-                DEFAULT: '#00a19b'
-            },
-            white:{
-                DEFAULT: '#FFF',
-            },
-            black:{
-                DEFAULT: '#000',
-            },
+            aqua:{
+                ligther: '#e6fffe',
+                light: '#b3fffc',
+                DEFAULT: '#00ccc5',//'#00e6de', //00A19B
+                dark: '#009994',
+            }
         },
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Lato', ...defaultTheme.fontFamily.sans],
+                logo: ['Montserrat'],
             },
         },
     },
 
     variants: {
         extend: {
+            width: ['responsive', 'hover', 'focus'],
+            outline: ['group-focus'],
             opacity: ['disabled'],
+            textColor:['disabled'],
         },
     },
 

@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class AuthenticatedSessionController extends Controller
@@ -19,6 +20,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        Redirect::setIntendedUrl(url()->previous());
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
