@@ -117,6 +117,12 @@ class UserController extends Controller
         return Redirect::route('user.profile', [$id]);
     }
 
+    public function showAbout()
+    {
+        $user = User::where('web_owner', 1)->firstOrfail();
+        return Inertia::render('AboutMe', ['biography' => $user->biography]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

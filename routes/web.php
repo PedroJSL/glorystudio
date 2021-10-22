@@ -20,13 +20,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('AboutMe');
-});
+Route::get('/', [UserController::class, 'showAbout']);
+Route::get('/about-me', [UserController::class, 'showAbout']);
 
-Route::get('/about-me', function(){
-    return Inertia::render('AboutMe');
-});
+
 
 //Rutas del apartado de portfolio
 Route::get('/portfolio', [ProjectController::class, 'showAllProjects'])->name('portfolio');

@@ -26,7 +26,7 @@
           <a v-bind:class="{'active': this.currentUrl === '/about-me',}" class="nav-link" href="/about-me">Sobre mi</a>
           <a v-bind:class="{'active': this.currentUrl === '/portfolio',}" class="nav-link" href="/portfolio">Portfolio</a>
           <a v-bind:class="{'active': this.currentUrl === '/blog',}" class="nav-link" href="/blog">Blog</a>
-          <a v-bind:class="{'active': this.currentUrl === '/shop',}" class="nav-link" href="/shop">Tienda</a>
+          <!--a v-bind:class="{'active': this.currentUrl === '/shop',}" class="nav-link" href="/shop">Tienda</a-->
           <!--a v-bind:class="{'text-aqua-dark': this.currentUrl === '/contact',}" class="text-pink mx-2 hover:text-pink-dark" href="/contact">Contacto</a-->
         </div>
       </div>
@@ -74,7 +74,7 @@
             <a v-bind:class="{'active': this.currentUrl === '/blog',}" class="block nav-link mr-4 p-2 shadow-sm" href="/blog">Blog</a>
           </li>
           <li>
-            <a v-bind:class="{'active': this.currentUrl === '/shop',}" class="block nav-link mr-4 p-2 shadow-sm" href="/shop" >Tienda</a>
+            <!--a v-bind:class="{'active': this.currentUrl === '/shop',}" class="block nav-link mr-4 p-2 shadow-sm" href="/shop" disabled>Tienda</a-->
           </li>
         </ul>
       </div>
