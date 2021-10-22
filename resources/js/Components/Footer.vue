@@ -35,7 +35,7 @@
 
         </div>
 
-        <!-- Formulario de contacto, solo visible en pantallas grandes -->
+        <!-- Formulario de contacto, solo visible en pantallas grandes
         <div class="hidden  w-6/12 m-auto md:block p-7 border-l-2 border-pink mt-2">
             <h2 class="text-pink-dark font-logo">Formulario de contacto</h2>
 
@@ -63,7 +63,7 @@
 
             </form>
         </div>
-
+        -->
     </div>
 
 

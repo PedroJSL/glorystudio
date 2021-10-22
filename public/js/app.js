@@ -30703,55 +30703,8 @@ var _hoisted_10 = {
 };
 var _hoisted_11 = ["href"];
 var _hoisted_12 = ["src"];
-var _hoisted_13 = {
-  "class": "hidden w-6/12 m-auto md:block p-7 border-l-2 border-pink mt-2"
-};
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "text-pink-dark font-logo"
-}, "Formulario de contacto", -1
-/* HOISTED */
-);
-
-var _hoisted_15 = {
-  "class": "mt-2"
-};
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "form-label",
-  "for": "email"
-}, "Correo electrónico ", -1
-/* HOISTED */
-);
-
-var _hoisted_17 = {
-  "class": "mt-2"
-};
-
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "form-label",
-  "for": "email"
-}, "Asunto ", -1
-/* HOISTED */
-);
-
-var _hoisted_19 = {
-  "class": "mt-2"
-};
-
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "form-label",
-  "for": "email"
-}, "Mensaje ", -1
-/* HOISTED */
-);
-
-var _hoisted_21 = {
-  "class": "w-auto mt-4 flex flex-row justify-end"
-};
-var _hoisted_22 = ["disabled"];
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex p-3 justify-end"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n        <a href=\"#\" class=\"link underline font-logo\">Aviso Legal</a>\n        <a href=\"#\" class=\"link underline font-logo\">Términos y Condiciones</a>\n        <a href=\"#\" class=\"link underline font-logo mr-8\">Política de Cookies</a>\n        "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-sm font-logo text-pink-dark"
@@ -30760,8 +30713,6 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_ValidationErrors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ValidationErrors");
-
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("footer", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Enlaces de contacto "), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.owner.contact, function (contact) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: contact.id
@@ -30794,54 +30745,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_11)]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Formulario de contacto, solo visible en pantallas grandes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ValidationErrors, {
-    "class": "mb-4 mt-4"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.submit && $options.submit.apply($options, arguments);
-    }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    id: "email",
-    name: "email",
-    type: "email",
-    "class": "mt-1 block w-full input",
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.form.email = $event;
-    }),
-    required: ""
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    id: "email",
-    name: "email",
-    type: "text",
-    "class": "mt-1 block w-full input",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.form.subject = $event;
-    }),
-    required: ""
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.subject]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-    id: "email",
-    name: "email",
-    "class": "mt-1 block w-full input",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.message = $event;
-    }),
-    required: ""
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.message]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'opacity-25': $data.form.processing
-    }, "ml-4 btn text-md"]),
-    disabled: $data.form.processing
-  }, " Enviar Mensaje ", 10
-  /* CLASS, PROPS */
-  , _hoisted_22)])], 32
-  /* HYDRATE_EVENTS */
-  )])]), _hoisted_23]);
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Formulario de contacto, solo visible en pantallas grandes\n        <div class=\"hidden  w-6/12 m-auto md:block p-7 border-l-2 border-pink mt-2\">\n            <h2 class=\"text-pink-dark font-logo\">Formulario de contacto</h2>\n\n            <ValidationErrors class=\"mb-4 mt-4\" />\n\n            <form @submit.prevent=\"submit\">\n                <div class=\"mt-2\">\n                    <label class=\"form-label\" for=\"email\">Correo electrónico </label>\n                    <input id=\"email\" name = \"email\" type=\"email\" class=\"mt-1 block w-full input\" v-model=\"form.email\" required>\n                </div>\n                <div class=\"mt-2\">\n                    <label class=\"form-label\" for=\"email\">Asunto </label>\n                    <input id=\"email\" name = \"email\" type=\"text\" class=\"mt-1 block w-full input\" v-model=\"form.subject\" required>\n                </div>\n                <div class=\"mt-2\">\n                    <label class=\"form-label\" for=\"email\">Mensaje </label>\n                    <textarea id=\"email\" name = \"email\" class=\"mt-1 block w-full input\" v-model=\"form.message\" required></textarea>\n                </div>\n\n                <div class=\"w-auto mt-4 flex flex-row justify-end\">\n                    <button :class=\"{ 'opacity-25': form.processing }\" :disabled=\"form.processing\" class = \"ml-4 btn text-md\">\n                        Enviar Mensaje\n                    </button>\n                </div>\n\n            </form>\n        </div>\n        ")]), _hoisted_13]);
 }
 
 /***/ }),
